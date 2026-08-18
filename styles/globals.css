@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-neutral-900 antialiased;
+}
+
+.container-page {
+  @apply mx-auto w-full max-w-container px-6 lg:px-8;
+}
+
+.eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full bg-navy-50 px-4 py-1.5 text-sm font-semibold text-navy-700;
+}
+
+.eyebrow-dot {
+  @apply h-2 w-2 rounded-full bg-navy-700;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full bg-navy-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-2 py-3 text-sm font-semibold text-neutral-900 transition-colors hover:text-navy-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700;
+}
+
+.check-bullet {
+  @apply flex items-center gap-2 text-sm text-neutral-700;
+}
+
+.check-bullet-icon {
+  @apply flex h-5 w-5 flex-none items-center justify-center rounded-full bg-navy-50 text-navy-700;
+}
+
+.field-label {
+  @apply mb-2 block text-sm font-medium text-neutral-900;
+}
+
+.field-input {
+  @apply w-full rounded-xl border-0 bg-navy-50 px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline focus:outline-2 focus:outline-offset-1 focus:outline-navy-500;
+}
+
+.info-card {
+  @apply rounded-2xl bg-navy-50 p-6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
