@@ -1,18 +1,16 @@
-import { useState } from 'react';
-import Layout from '@/components/Layout';
+import { useState } from "react";
+import Layout from "@/components/Layout";
 
 export default function BookAppointmentPage() {
   const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    symptoms: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    symptoms: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   function handleChange(e) {
     setForm((f) => ({
@@ -20,55 +18,50 @@ export default function BookAppointmentPage() {
       [e.target.name]: e.target.value,
     }));
 
-    // Clear previous messages when user edits the form
-    setError('');
     setSubmitted(false);
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
 
-    setLoading(true);
-    setSubmitted(false);
-    setError('');
+    const subject = `New Appointment Request - ${form.firstName} ${form.lastName}`;
 
-    try {
-      const response = await fetch('/api/book-appointment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
+    const body = `
+New Appointment Request
 
-      const data = await response.json();
+Patient Details
+-------------------------
 
-      if (!response.ok) {
-        throw new Error(
-          data.message || 'Unable to submit appointment request.'
-        );
-      }
+First Name: ${form.firstName}
 
-      setSubmitted(true);
+Last Name: ${form.lastName}
 
-      // Clear form after successful submission
-      setForm({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        symptoms: '',
-      });
-    } catch (err) {
-      console.error(err);
+Email: ${form.email || "Not provided"}
 
-      setError(
-        err.message ||
-          'Something went wrong. Please try again.'
-      );
-    } finally {
-      setLoading(false);
-    }
+Contact Number: ${form.phone}
+
+Symptoms / Reason for Appointment:
+${form.symptoms}
+
+-------------------------
+Submitted from Dhruva Hospitals website.
+`;
+
+    const mailto = `mailto:dhruvahospitalkadapa@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+
+    setSubmitted(true);
+
+    setForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      symptoms: "",
+    });
   }
 
   return (
@@ -85,7 +78,7 @@ export default function BookAppointmentPage() {
           </h1>
 
           <p className="mt-3 text-neutral-500">
-            Kindly, fill your details below. We will reach out with you.
+            Kindly, fill your details below. We will reach out to you.
           </p>
         </div>
 
@@ -178,6 +171,7 @@ export default function BookAppointmentPage() {
                 className="field-input"
               />
             </div>
+
           </div>
 
           {/* Symptoms */}
@@ -206,34 +200,23 @@ export default function BookAppointmentPage() {
 
             <button
               type="submit"
-              disabled={loading}
-              className="btn-primary px-10 disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn-primary px-10"
             >
-              {loading ? 'Sending...' : 'Submit request'}
+              Submit request
             </button>
 
-            {/* Success */}
             {submitted && (
               <p
                 className="text-center text-sm font-medium text-green-700"
                 role="status"
               >
-                Appointment request received successfully. Our hospital
-                team will call you shortly to confirm your appointment.
-              </p>
-            )}
-
-            {/* Error */}
-            {error && (
-              <p
-                className="text-center text-sm font-medium text-red-600"
-                role="alert"
-              >
-                {error}
+                Your appointment details have been prepared.
+                Please send the email from your email application.
               </p>
             )}
 
           </div>
+
         </form>
       </section>
     </Layout>
