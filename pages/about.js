@@ -26,7 +26,7 @@ export default function AboutPage() {
         <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
           <PlaceholderImage
             icon="people"
-            file="public/images/about-doctors.jpg"
+            file="images/about-doctors.jpg"
             className="aspect-[6/5] w-full rounded-3xl"
           />
           <div className="flex flex-col gap-5">
@@ -71,7 +71,7 @@ export default function AboutPage() {
           </div>
           <PlaceholderImage
             icon="photo"
-            file="public/images/about-doctor-portrait.jpg"
+            file="images/about-doctor-portrait.jpg"
             className="aspect-[5/4] w-full rounded-3xl"
           />
         </div>

@@ -19,12 +19,13 @@ const departments = [
     tags: ['Immunization', 'Neonatal ICU', 'Growth Monitoring', 'Pediatric Emergency', 'Vaccination'],
   },
   {
-    label: 'Surgery & General Medicine',
+    label: 'peadatric',
     icon: 'people',
-    image: 'images/dept-surgery.jpg',
+    image: 'images/dept-peadatric.jpg',
     description:
-      'Advanced surgical expertise combined with everyday medical care—minimally invasive procedures, diagnostics, and chronic disease management under one roof.',
-    tags: ['Laparoscopy', 'General Surgery', 'Diagnostics', 'Chronic Care', 'Minor Procedures'],
+  'Compassionate and specialized care for infants, children, and adolescents—covering routine check-ups, vaccinations, growth and development, diagnosis, and treatment under one roof.',
+
+tags: ['Child Care', 'Newborn Care', 'Vaccination', 'Growth & Development'],
   },
 ];
 

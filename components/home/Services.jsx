@@ -6,11 +6,12 @@ const services = [
     description: 'Complete support for prenatal wellness, safe deliveries, and advanced reproductive health.',
     image: 'images/service-maternity.jpg',
   },
-  {
-    title: 'Minimally Invasive Surgeries',
-    description: 'Advanced surgical solutions ensuring minimal pain, shorter hospital stays, and recovery.',
-    image: 'images/service-surgery.jpg',
-  },
+
+   {
+  title: 'Emergency Care',
+  description: 'Fast, reliable medical care for urgent conditions and unexpected health emergencies.',
+  image: 'images/service-emergency.jpg',
+},
   {
     title: 'Pediatric Emergency & Child Care',
     description: 'Specialized care for infants and children, from acute fevers to emergencies.',

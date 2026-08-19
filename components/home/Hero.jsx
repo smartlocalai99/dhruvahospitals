@@ -14,7 +14,7 @@ export default function Hero() {
           </h1>
           <p className="mt-6 max-w-md text-base leading-relaxed text-neutral-500">
             Bringing world-class medical standards, advanced surgical care,
-            and compassionate healing to Kadapa—without compromise.
+            and compassionate healing to Kadapa without compromise.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
