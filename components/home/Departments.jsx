@@ -5,7 +5,7 @@ const departments = [
   {
     label: "Women's Care",
     icon: 'people',
-    image: 'public/images/dept-womens-care.jpg',
+    image: 'images/dept-womens-care.jpg',
     description:
       "Complete care for every stage of a woman's health journey. From menstrual health and antenatal care to pregnancy, childbirth, fibroids, and advanced gynaecological procedures.",
     tags: ['Maternity', 'Pregnancy', 'Laparoscopy', 'Gynaecology', 'Fibroids', 'Obstetrics'],
@@ -13,7 +13,7 @@ const departments = [
   {
     label: 'Child & Neonatal Care',
     icon: 'people',
-    image: 'public/images/dept-child-care.jpg',
+    image: 'images/dept-child-care.jpg',
     description:
       'Dedicated support for infants and growing children—from routine immunizations and growth monitoring to emergency pediatric and neonatal intensive care.',
     tags: ['Immunization', 'Neonatal ICU', 'Growth Monitoring', 'Pediatric Emergency', 'Vaccination'],
@@ -21,7 +21,7 @@ const departments = [
   {
     label: 'Surgery & General Medicine',
     icon: 'people',
-    image: 'public/images/dept-surgery.jpg',
+    image: 'images/dept-surgery.jpg',
     description:
       'Advanced surgical expertise combined with everyday medical care—minimally invasive procedures, diagnostics, and chronic disease management under one roof.',
     tags: ['Laparoscopy', 'General Surgery', 'Diagnostics', 'Chronic Care', 'Minor Procedures'],

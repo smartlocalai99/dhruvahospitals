@@ -4,22 +4,22 @@ const services = [
   {
     title: 'Maternity & Gynaecology Care',
     description: 'Complete support for prenatal wellness, safe deliveries, and advanced reproductive health.',
-    image: 'public/images/service-maternity.jpg',
+    image: 'images/service-maternity.jpg',
   },
   {
     title: 'Minimally Invasive Surgeries',
     description: 'Advanced surgical solutions ensuring minimal pain, shorter hospital stays, and recovery.',
-    image: 'public/images/service-surgery.jpg',
+    image: 'images/service-surgery.jpg',
   },
   {
     title: 'Pediatric Emergency & Child Care',
     description: 'Specialized care for infants and children, from acute fevers to emergencies.',
-    image: 'public/images/service-pediatric.jpg',
+    image: 'images/service-pediatric.jpg',
   },
   {
     title: 'General Medicine & Diagnostics',
     description: 'Expert consultation and diagnostics for chronic conditions and everyday health concerns.',
-    image: 'public/images/service-diagnostics.jpg',
+    image: "images/service-diagnostics.jpg",
   },
 ];
 

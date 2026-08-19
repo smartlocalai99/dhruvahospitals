@@ -50,7 +50,7 @@ export default function AboutTeaser() {
 
         <PlaceholderImage
           icon="people"
-          file="public/images/about-team.jpg"
+          file="images/about-team.jpg"
           className="aspect-[6/5] w-full rounded-3xl"
         />
       </div>

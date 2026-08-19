@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Logo from './Logo';
 
 const navLinks = [
   { href: '/facilities', label: 'Facilities' },
@@ -19,7 +18,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/95 backdrop-blur">
       <div className="container-page flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <Logo className="h-10 w-10" />
+          <img
+            src="/images/dhruva.jpg"
+            alt="Dhruva Hospitals"
+            className="h-14  w-auto object-contain"
+          />
           <span className="sr-only">Dhruva Hospitals</span>
         </Link>
 
@@ -55,9 +58,19 @@ export default function Navbar() {
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
             {open ? (
-              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
             ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path
+                d="M4 7h16M4 12h16M4 17h16"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
             )}
           </svg>
         </button>
@@ -65,7 +78,10 @@ export default function Navbar() {
 
       {open && (
         <div className="border-t border-neutral-100 bg-white lg:hidden">
-          <nav className="container-page flex flex-col gap-1 py-4" aria-label="Primary mobile">
+          <nav
+            className="container-page flex flex-col gap-1 py-4"
+            aria-label="Primary mobile"
+          >
             {navLinks.map((link) => {
               const active = router.pathname === link.href;
               return (
@@ -81,6 +97,7 @@ export default function Navbar() {
                 </Link>
               );
             })}
+
             <Link
               href="/book-appointment"
               onClick={() => setOpen(false)}

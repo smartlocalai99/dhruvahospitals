@@ -27,35 +27,47 @@ export default function Hero() {
           </div>
 
           <div className="mt-10 flex items-center gap-3">
-            <div className="flex -space-x-3">
-              {avatarSeeds.map((seed) => (
-                <span
-                  key={seed}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-navy-100 text-xs font-semibold text-navy-700"
-                >
-                  {seed}
-                </span>
-              ))}
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <GoogleGIcon className="h-4 w-4" />
-                <div className="flex text-amber-400">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <StarIcon key={i} className="h-3.5 w-3.5" />
-                  ))}
-                </div>
-              </div>
-              <p className="mt-0.5 text-sm text-neutral-600">
-                4.9 average rating from 100+ patients
-              </p>
-            </div>
-          </div>
+  <div className="flex -space-x-3">
+    <img
+      src="/images/avatar-1.jpg"
+      alt=""
+      className="h-11 w-11 rounded-full border-2 border-white object-cover"
+    />
+
+    <img
+      src="/images/avatar-2.jpg"
+      alt=""
+      className="h-11 w-11 rounded-full border-2 border-white object-cover"
+    />
+
+    <img
+      src="/images/avatar-3.jpg"
+      alt=""
+      className="h-11 w-11 rounded-full border-2 border-white object-cover"
+    />
+  </div>
+
+  <div>
+    <div className="flex items-center gap-1.5">
+      <GoogleGIcon className="h-4 w-4" />
+
+      <div className="flex text-amber-400">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <StarIcon key={i} className="h-3.5 w-3.5" />
+        ))}
+      </div>
+    </div>
+
+    <p className="mt-0.5 text-sm text-neutral-600">
+      4.9 average rating from 100+ patients
+    </p>
+  </div>
+</div>
         </div>
 
         <PlaceholderImage
           icon="people"
-          file="public/images/hero-care.jpg"
+          file="/images/hero-care.jpg"
           className="aspect-[4/5] w-full rounded-3xl sm:aspect-[5/6] lg:aspect-[9/10]"
         />
       </div>
