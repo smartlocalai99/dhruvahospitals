@@ -6,11 +6,11 @@ export default function PageHeader({ eyebrow, title, subtitle }) {
           <span className="eyebrow-dot" />
           {eyebrow}
         </span>
-        <h1 className="mx-auto mt-5 max-w-2xl text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+        <h1 className="mx-auto mt-5   text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
           {title}
         </h1>
         {subtitle && (
-          <p className="mx-auto mt-4 max-w-xl text-sm text-navy-800 sm:text-base">
+          <p className="mx-auto mt-4  text-sm text-navy-800 sm:text-base">
             {subtitle}
           </p>
         )}

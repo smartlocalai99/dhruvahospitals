@@ -14,11 +14,13 @@ const infoCards = [
     icon: PhoneIcon,
     label: 'Call Us',
     value: '+91 9959959693',
+    href: 'tel:+919959959693',
   },
   {
     icon: MailIcon,
     label: 'Mail Us',
     value: 'dhruvahospitalkadapa@gmail.com',
+    href: 'mailto:dhruvahospitalkadapa@gmail.com',
   },
   {
     icon: ClockIcon,
@@ -58,9 +60,13 @@ export default function ContactPage() {
 
         {/* Contact Information Cards */}
         <div className="grid gap-5 sm:grid-cols-3">
-          {infoCards.map(({ icon: Icon, label, value }) => (
-            <div
+          {infoCards.map(({ icon: Icon, label, value, href }) => {
+            const Card = href ? 'a' : 'div';
+
+            return (
+            <Card
               key={label}
+              href={href}
               className="info-card"
             >
               <span className="text-navy-700">
@@ -74,8 +80,9 @@ export default function ContactPage() {
               <p className="mt-1 text-sm text-neutral-600">
                 {value}
               </p>
-            </div>
-          ))}
+            </Card>
+            );
+          })}
         </div>
 
         {/* Full Width Location */}

@@ -4,17 +4,28 @@ import { StarIcon, GoogleGIcon } from '../Icons';
 
 const avatarSeeds = ['A', 'B', 'C'];
 
+const trustPoints = [
+  { value: '24/7', label: 'Emergency care' },
+  { value: '20+', label: 'Medical experts' },
+  { value: '4+', label: 'Specialized departments' },
+];
+
 export default function Hero() {
   return (
     <section className="container-page pt-10 sm:pt-16">
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-10">
         <div>
-          <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-neutral-950 sm:text-5xl lg:text-[3.4rem]">
-            One Trusted Place for Exceptional Family Healthcare.
+          <span className="eyebrow">
+            <span className="eyebrow-dot" />
+            Dhruva Hospitals, Kadapa
+          </span>
+          <h1 className="text-4xl pt-5 font-extrabold leading-[1.08] tracking-tight text-neutral-950 sm:text-5xl lg:text-[3.4rem]">
+            Trusted care for every stage of family life.
           </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-neutral-500">
-            Bringing world-class medical standards, advanced surgical care,
-            and compassionate healing to Kadapa without compromise.
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-neutral-500">
+            From everyday health needs to advanced treatment, our experienced
+            doctors and compassionate team are here to help your family feel
+            informed, supported, and cared for.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
@@ -63,12 +74,25 @@ export default function Hero() {
     </p>
   </div>
 </div>
+
+          <div className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-neutral-100 pt-6">
+            {trustPoints.map((point) => (
+              <div key={point.label}>
+                <div className="text-xl font-extrabold text-navy-700 sm:text-2xl">
+                  {point.value}
+                </div>
+                <p className="mt-1 text-xs leading-snug text-neutral-500 sm:text-sm">
+                  {point.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <PlaceholderImage
           icon="people"
           file="/images/hero-care.jpg"
-          className="aspect-[4/5] w-full rounded-3xl sm:aspect-[5/6] lg:aspect-[9/10]"
+          className="aspect-[4/3] w-full rounded-3xl"
         />
       </div>
     </section>

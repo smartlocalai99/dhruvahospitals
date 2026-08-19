@@ -11,6 +11,7 @@ export default function BookAppointmentPage() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   function handleChange(e) {
     setForm((f) => ({
@@ -19,49 +20,31 @@ export default function BookAppointmentPage() {
     }));
 
     setSubmitted(false);
+    setError('');
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setSubmitted(false);
+    setError('');
 
-    const subject = `New Appointment Request - ${form.firstName} ${form.lastName}`;
+    try {
+      const response = await fetch('/api/book-appointment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const result = await response.json();
 
-    const body = `
-New Appointment Request
+      if (!response.ok) {
+        throw new Error(result.error || 'Unable to send your request.');
+      }
 
-Patient Details
--------------------------
-
-First Name: ${form.firstName}
-
-Last Name: ${form.lastName}
-
-Email: ${form.email || "Not provided"}
-
-Contact Number: ${form.phone}
-
-Symptoms / Reason for Appointment:
-${form.symptoms}
-
--------------------------
-Submitted from Dhruva Hospitals website.
-`;
-
-    const mailto = `mailto:dhruvahospitalkadapa@gmail.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailto;
-
-    setSubmitted(true);
-
-    setForm({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      symptoms: "",
-    });
+      setSubmitted(true);
+      setForm({ firstName: '', lastName: '', email: '', phone: '', symptoms: '' });
+    } catch (submitError) {
+      setError(submitError.message);
+    }
   }
 
   return (
@@ -206,12 +189,14 @@ Submitted from Dhruva Hospitals website.
             </button>
 
             {submitted && (
-              <p
-                className="text-center text-sm font-medium text-green-700"
-                role="status"
-              >
-                Your appointment details have been prepared.
-                Please send the email from your email application.
+              <p className="text-center text-sm font-medium text-green-700" role="status">
+                Your appointment request was sent successfully. The hospital team will contact you shortly.
+              </p>
+            )}
+
+            {error && (
+              <p className="text-center text-sm font-medium text-red-600" role="alert">
+                {error}
               </p>
             )}
 

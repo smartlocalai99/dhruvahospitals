@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PlaceholderImage from '../PlaceholderImage';
 
 const services = [
@@ -21,6 +22,26 @@ const services = [
     title: 'General Medicine & Diagnostics',
     description: 'Expert consultation and diagnostics for chronic conditions and everyday health concerns.',
     image: "images/service-diagnostics.jpg",
+  },
+  {
+    title: 'Surgical & Laparoscopic Care',
+    description: 'Safe, minimally invasive procedures supported by experienced surgeons and modern operation theaters.',
+    image: 'images/service-diagnostics.jpg',
+  },
+  {
+    title: 'Critical Care & ICU Support',
+    description: 'Close monitoring and coordinated treatment for patients who need intensive medical attention.',
+    image: 'images/service-emergency.jpg',
+  },
+  {
+    title: 'Neonatal & Newborn Care',
+    description: 'Specialized support for newborns with attentive monitoring from experienced pediatric clinicians.',
+    image: 'images/service-pediatric.jpg',
+  },
+  {
+    title: 'Preventive Health Checkups',
+    description: 'Thoughtful consultations and diagnostic screening to help your family stay ahead of health concerns.',
+    image: 'images/service-maternity.jpg',
   },
 ];
 
@@ -52,9 +73,21 @@ export default function Services() {
               <div>
                 <h3 className="text-lg font-semibold text-neutral-950">{service.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-neutral-500">{service.description}</p>
+                <Link
+                  href="/facilities"
+                  className="mt-3 inline-flex text-sm font-semibold text-navy-700 transition-colors hover:text-navy-900"
+                >
+                  Read more
+                </Link>
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link href="/facilities" className="btn-primary">
+            View all facilities
+          </Link>
         </div>
       </div>
     </section>

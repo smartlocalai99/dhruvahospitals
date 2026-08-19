@@ -55,11 +55,16 @@ export default function AboutTeaser() {
         />
       </div>
 
-      <div className="mt-16 grid grid-cols-2 gap-8 border-t border-neutral-100 pt-10 sm:grid-cols-4">
-        {stats.map((stat) => (
-          <div key={stat.label}>
+      <div className="mt-16 grid gap-y-8 border-t border-neutral-100 pt-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0">
+        {stats.map((stat, index) => (
+          <div
+            key={stat.label}
+            className={`flex items-center gap-4 lg:px-8 first:lg:pl-0 last:lg:pr-0 ${
+              index > 0 ? 'lg:border-l lg:border-neutral-200' : ''
+            }`}
+          >
             <div className="text-3xl font-extrabold text-navy-700 sm:text-4xl">{stat.value}</div>
-            <p className="mt-1 text-sm text-neutral-500">{stat.label}</p>
+            <p className="text-sm leading-snug text-neutral-500">{stat.label}</p>
           </div>
         ))}
       </div>

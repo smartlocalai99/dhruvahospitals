@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import AppointmentModal from './AppointmentModal';
 
 const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/facilities', label: 'Facilities' },
   { href: '/doctors', label: 'Doctors' },
   { href: '/dhruva-speaks', label: 'Dhruva speaks' },
@@ -13,9 +15,16 @@ const navLinks = [
 export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
+
+  function openAppointment() {
+    setOpen(false);
+    setAppointmentOpen(true);
+  }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/95 backdrop-blur">
+    <>
+      <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/95 backdrop-blur">
       <div className="container-page flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <img
@@ -44,9 +53,9 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <Link href="/book-appointment" className="btn-primary">
+          <button type="button" onClick={openAppointment} className="btn-primary">
             Book now
-          </Link>
+          </button>
         </div>
 
         <button
@@ -98,16 +107,16 @@ export default function Navbar() {
               );
             })}
 
-            <Link
-              href="/book-appointment"
-              onClick={() => setOpen(false)}
-              className="btn-primary mt-2 w-full"
-            >
+            <button type="button" onClick={openAppointment} className="btn-primary mt-2 w-full">
               Book now
-            </Link>
+            </button>
           </nav>
         </div>
       )}
-    </header>
+
+      </header>
+
+      {appointmentOpen && <AppointmentModal onClose={() => setAppointmentOpen(false)} />}
+    </>
   );
 }

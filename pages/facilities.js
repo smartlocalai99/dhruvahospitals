@@ -31,13 +31,13 @@ export default function FacilitiesPage() {
           <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
             <a
               href="tel:6305800108"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-brandred-600 transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-brandred-600 transition-opacity hover:opacity-90"
             >
               Emergency Call: 63058 00108
             </a>
             <a
               href="tel:8142188108"
-              className="inline-flex items-center justify-center rounded-full border border-white/70 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-2xl border border-white/70 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
               Ambulance: 81421 88108
             </a>

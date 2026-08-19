@@ -7,7 +7,7 @@ export default function Faq() {
 
   return (
     <section className="container-page py-20 sm:py-28">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-10 text-center">
         <span className="eyebrow">
           <span className="eyebrow-dot" />
           Frequently Asked Questions
@@ -20,11 +20,11 @@ export default function Faq() {
         </p>
       </div>
 
-      <div className="mx-auto mt-12 max-w-3xl divide-y divide-neutral-100 border-t border-neutral-100">
+      <div className="mx-10 mt-12 grid gap-x-10 border-t border-neutral-100 md:grid-cols-2">
         {faqs.map((faq, i) => {
           const open = openIndex === i;
           return (
-            <div key={faq.question}>
+            <div key={faq.question} className="border-b border-neutral-100">
               <button
                 type="button"
                 onClick={() => setOpenIndex(open ? null : i)}
@@ -35,7 +35,7 @@ export default function Faq() {
                 <PlusMinusIcon open={open} className="h-5 w-5 flex-none text-neutral-500" />
               </button>
               {open && (
-                <p className="-mt-2 max-w-2xl pb-6 text-sm leading-relaxed text-neutral-500">
+                <p className="-mt-2 pb-6 text-sm leading-relaxed text-neutral-500">
                   {faq.answer}
                 </p>
               )}

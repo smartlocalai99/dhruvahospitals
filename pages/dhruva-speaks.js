@@ -46,9 +46,6 @@ import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 
 export default function DhruvaSpeaksPage() {
-  const instagramUrl =
-    'https://www.instagram.com/dhruva_hospitals_kadapa/';
-
   return (
     <Layout
       title="Dhruva Speaks"
@@ -60,48 +57,16 @@ export default function DhruvaSpeaksPage() {
         subtitle="Expert advice, practical health tips, and trusted guidance from the medical team at Dhruva Hospitals."
       />
 
-      <section className="container-page py-16 sm:py-20">
-
-        {/* Instagram Section */}
-        <div className="mx-auto max-w-6xl">
-
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-neutral-950 sm:text-3xl">
-              Follow Dhruva Hospitals
-            </h2>
-
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-neutral-500">
-              Stay updated with health tips, hospital updates, doctor
-              guidance, awareness campaigns, and more from Dhruva Hospitals.
-            </p>
-
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy-800"
-            >
-              Follow us on Instagram
-            </a>
-          </div>
-
-          {/* Instagram Profile */}
-          <div className="mt-12 flex justify-center">
-            <div className="w-full max-w-4xl overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
-
-              <iframe
-                src="https://www.instagram.com/dhruva_hospitals_kadapa/embed"
-                title="Dhruva Hospitals Instagram"
-                className="h-[700px] w-full border-0"
-                scrolling="no"
-                allowTransparency="true"
-              />
-
-            </div>
-          </div>
-
+      <section className="w-full py-16 sm:py-20">
+        <div className="w-full overflow-hidden border-y border-neutral-200 bg-white">
+          <iframe
+            src="https://www.instagram.com/dhruva_hospitals_kadapa/embed"
+            title="Dhruva Hospitals Instagram"
+            className="h-[520px] w-full border-0 sm:h-[620px]"
+            scrolling="no"
+            allowTransparency="true"
+          />
         </div>
-
       </section>
     </Layout>
   );
