@@ -1,6 +1,7 @@
+import { FaWhatsapp } from 'react-icons/fa';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
-
+import EmergencyBanner from '@/components/EmergencyBanner';
 import {
   PhoneIcon,
   MailIcon,
@@ -8,46 +9,40 @@ import {
   LocationIcon,
   ExternalLinkIcon,
 } from '@/components/Icons';
+import { site, callNumbers, whatsappLink, googleMapsUrl, googleMapsEmbedUrl } from '@/lib/site';
+import { hospitalSchema } from '@/lib/schema';
+
+const linkClass = 'transition-colors hover:text-navy-700';
 
 const infoCards = [
   {
     icon: PhoneIcon,
     label: 'Call Us',
-    value: '+91 9959959693',
-    href: 'tel:+919959959693',
+    lines: callNumbers.map((number) => ({ text: number.display, href: number.href })),
+  },
+  {
+    icon: FaWhatsapp,
+    label: 'WhatsApp',
+    lines: [{ text: site.phones.main.display, href: whatsappLink(), external: true }],
   },
   {
     icon: MailIcon,
     label: 'Mail Us',
-    value: 'dhruvahospitalkadapa@gmail.com',
-    href: 'mailto:dhruvahospitalkadapa@gmail.com',
+    lines: [{ text: site.email, href: `mailto:${site.email}` }],
   },
   {
     icon: ClockIcon,
     label: 'Our Timings',
-    value: 'Mon-Sun, 9am to 5pm',
+    lines: [{ text: `OPD: ${site.hours.opd}` }, { text: `Emergency: ${site.hours.emergency}` }],
   },
 ];
 
-const address =
-  'Venu Gopal House, S Reddy Hospital, 1/705-1, beside Raithu Bazar, Dwaraka Nagar, Old Kadapa, Andhra Pradesh 516001.';
-
-const mapAddress =
-  'Dhruva Hospitals, Venu Gopal House, S Reddy Hospital, 1/705-1, beside Raithu Bazar, Dwaraka Nagar, Old Kadapa, Andhra Pradesh 516001';
-
 export default function ContactPage() {
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    mapAddress
-  )}`;
-
-  const googleMapsEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
-    mapAddress
-  )}&output=embed`;
-
   return (
     <Layout
       title="Contact Us"
-      description="Connect with Dhruva Hospitals for appointments, medical enquiries, or round-the-clock emergency support."
+      description="Connect with Dhruva Hospitals, Kadapa for appointments, medical enquiries, or round-the-clock emergency support."
+      jsonLd={hospitalSchema()}
     >
       {/* Page Header */}
       <PageHeader
@@ -59,30 +54,37 @@ export default function ContactPage() {
       <section className="container-page py-16 sm:py-20">
 
         {/* Contact Information Cards */}
-        <div className="grid gap-5 sm:grid-cols-3">
-          {infoCards.map(({ icon: Icon, label, value, href }) => {
-            const Card = href ? 'a' : 'div';
-
-            return (
-            <Card
-              key={label}
-              href={href}
-              className="info-card"
-            >
+        <h2 className="sr-only">Contact information</h2>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {infoCards.map(({ icon: Icon, label, lines }) => (
+            <div key={label} className="info-card">
               <span className="text-navy-700">
-                <Icon className="h-5 w-5" />
+                <Icon className="h-5 w-5" aria-hidden="true" />
               </span>
 
               <h3 className="mt-4 text-base font-semibold text-neutral-950">
                 {label}
               </h3>
 
-              <p className="mt-1 text-sm text-neutral-600">
-                {value}
-              </p>
-            </Card>
-            );
-          })}
+              <ul className="mt-1 space-y-1 text-sm text-neutral-600">
+                {lines.map((line) => (
+                  <li key={line.text}>
+                    {line.href ? (
+                      <a
+                        href={line.href}
+                        className={linkClass}
+                        {...(line.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      >
+                        {line.text}
+                      </a>
+                    ) : (
+                      line.text
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         {/* Full Width Location */}
@@ -100,9 +102,9 @@ export default function ContactPage() {
                   Location
                 </h2>
 
-                <p className="mt-2 max-w-5xl text-sm leading-6 text-neutral-500">
-                  {address}
-                </p>
+                <address className="mt-2 max-w-5xl text-sm not-italic leading-6 text-neutral-500">
+                  {site.address.full}.
+                </address>
               </div>
             </div>
 
@@ -132,6 +134,8 @@ export default function ContactPage() {
 
           </div>
         </div>
+
+        <EmergencyBanner className="mt-14" />
 
       </section>
     </Layout>

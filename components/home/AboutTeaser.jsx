@@ -1,19 +1,14 @@
 import Link from 'next/link';
-import PlaceholderImage from '../PlaceholderImage';
+import CoverImage from '../CoverImage';
+import CountUp from '../CountUp';
 import { CheckIcon } from '../Icons';
+import { stats } from '@/lib/data';
 
 const points = [
   'Patient-Centered Care',
   'Affordable Healthcare',
   'Emergency & Critical Care',
   'Transparent Treatment Guidance',
-];
-
-const stats = [
-  { value: '24/7', label: 'Emergency support' },
-  { value: '4+', label: 'Dedicated departments' },
-  { value: '20+', label: 'Specialized doctor experts' },
-  { value: '95%', label: 'Overall patient satisfaction rate' },
 ];
 
 export default function AboutTeaser() {
@@ -29,7 +24,7 @@ export default function AboutTeaser() {
             Advanced Healthcare, Built Around People
           </h2>
           <p className="mt-4 max-w-md text-neutral-500">
-            Dhruva Hospitals brings trusted medical expertise, modern healthcare standards, and compassionate care closer to the families of Kadapa.
+            Founded to bring advanced medical care within reach of every family in Rayalaseema, Dhruva Hospitals combines trusted expertise, modern infrastructure, and compassionate care.
           </p>
 
           <div className="mt-7 grid grid-cols-2 gap-x-6 gap-y-3">
@@ -48,9 +43,10 @@ export default function AboutTeaser() {
           </Link>
         </div>
 
-        <PlaceholderImage
-          icon="people"
-          file="images/about-team.jpg"
+        <CoverImage
+          src="/images/about-team.jpg"
+          alt="Doctors at Dhruva Hospitals"
+          sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-[6/5] w-full rounded-3xl"
         />
       </div>
@@ -63,7 +59,9 @@ export default function AboutTeaser() {
               index > 0 ? 'lg:border-l lg:border-neutral-200' : ''
             }`}
           >
-            <div className="text-3xl font-extrabold text-navy-700 sm:text-4xl">{stat.value}</div>
+            <div className="text-3xl font-extrabold text-navy-700 sm:text-4xl">
+              <CountUp value={stat.value} />
+            </div>
             <p className="text-sm leading-snug text-neutral-500">{stat.label}</p>
           </div>
         ))}

@@ -5,13 +5,17 @@ import Services from '@/components/home/Services';
 import FacilitiesTeaser from '@/components/home/FacilitiesTeaser';
 import AboutTeaser from '@/components/home/AboutTeaser';
 import DoctorsTeaser from '@/components/home/DoctorsTeaser';
+import Testimonials from '@/components/home/Testimonials';
 import Faq from '@/components/home/Faq';
+import { faqs } from '@/lib/data';
+import { faqSchema, hospitalSchema } from '@/lib/schema';
 
 export default function Home() {
   return (
     <Layout
-      title="One Trusted Place for Exceptional Family Healthcare"
-      description="Dhruva Hospitals brings world-class medical standards, advanced surgical care, and compassionate healing to Kadapa."
+      title="Fertility, Maternity & Newborn Care in Kadapa"
+      description="Dhruva Hospitals in Kadapa offers fertility & IVF, pregnancy and gynaecology care, a Level III NICU, paediatrics, surgery and 24/7 emergency care. Book an appointment today."
+      jsonLd={[hospitalSchema(), faqSchema(faqs)]}
     >
       <Hero />
       <Departments />
@@ -19,6 +23,7 @@ export default function Home() {
       <FacilitiesTeaser />
       <AboutTeaser />
       <DoctorsTeaser />
+      <Testimonials />
       <Faq />
     </Layout>
   );

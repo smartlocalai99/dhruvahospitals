@@ -25,20 +25,29 @@ export default function Faq() {
           const open = openIndex === i;
           return (
             <div key={faq.question} className="border-b border-neutral-100">
-              <button
-                type="button"
-                onClick={() => setOpenIndex(open ? null : i)}
-                aria-expanded={open}
-                className="flex w-full items-center justify-between gap-6 py-6 text-left"
+              <h3>
+                <button
+                  type="button"
+                  id={`faq-question-${i}`}
+                  onClick={() => setOpenIndex(open ? null : i)}
+                  aria-expanded={open}
+                  aria-controls={`faq-answer-${i}`}
+                  className="flex w-full items-center justify-between gap-6 py-6 text-left"
+                >
+                  <span className="text-base font-medium text-neutral-950">{faq.question}</span>
+                  <PlusMinusIcon open={open} className="h-5 w-5 flex-none text-neutral-500" aria-hidden="true" />
+                </button>
+              </h3>
+              <div
+                id={`faq-answer-${i}`}
+                role="region"
+                aria-labelledby={`faq-question-${i}`}
+                hidden={!open}
               >
-                <span className="text-base font-medium text-neutral-950">{faq.question}</span>
-                <PlusMinusIcon open={open} className="h-5 w-5 flex-none text-neutral-500" />
-              </button>
-              {open && (
                 <p className="-mt-2 pb-6 text-sm leading-relaxed text-neutral-500">
                   {faq.answer}
                 </p>
-              )}
+              </div>
             </div>
           );
         })}

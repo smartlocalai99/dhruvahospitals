@@ -25,7 +25,7 @@ export default function DoctorsTeaser() {
 
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {doctors.slice(0, 4).map((doctor) => (
-          <DoctorCard key={doctor.id} doctor={doctor} />
+          <DoctorCard key={doctor.slug} doctor={doctor} />
         ))}
       </div>
     </section>

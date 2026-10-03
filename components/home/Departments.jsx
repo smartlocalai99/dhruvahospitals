@@ -1,31 +1,32 @@
+import Link from 'next/link';
 import { useState } from 'react';
-import PlaceholderImage from '../PlaceholderImage';
+import CoverImage from '../CoverImage';
+import { ArrowRightIcon } from '../Icons';
 
 const departments = [
   {
     label: "Women's Care",
-    icon: 'people',
-    image: 'images/dept-womens-care.jpg',
+    image: '/images/dept-womens-care.jpg',
+    href: '/services/pregnancy',
     description:
-      "Complete care for every stage of a woman's health journey. From menstrual health and antenatal care to pregnancy, childbirth, fibroids, and advanced gynaecological procedures.",
-    tags: ['Maternity', 'Pregnancy', 'Laparoscopy', 'Gynaecology', 'Fibroids', 'Obstetrics'],
+      "Complete care for every stage of a woman's health journey. From antenatal care, safe deliveries and high-risk pregnancies to laparoscopic gynaecology and cancer screening.",
+    tags: ['Pregnancy Care', 'Normal Delivery', 'High-Risk Pregnancy', 'Gynaecology', 'Laparoscopy', 'Cancer Screening'],
+  },
+  {
+    label: 'Fertility & IVF',
+    image: '/images/dept-child-care.jpg',
+    href: '/services/fertility',
+    description:
+      'Advanced reproductive medicine for couples hoping to start a family, with a modular embryology lab, ICSI facilities and personalised treatment plans.',
+    tags: ['IUI', 'IVF', 'ICSI', 'Male Infertility', 'Semen Analysis', 'Ovulation Study'],
   },
   {
     label: 'Child & Neonatal Care',
-    icon: 'people',
-    image: 'images/dept-child-care.jpg',
+    image: '/images/dept-paediatric.jpg',
+    href: '/services/neonatal',
     description:
-      'Dedicated support for infants and growing children—from routine immunizations and growth monitoring to emergency pediatric and neonatal intensive care.',
-    tags: ['Immunization', 'Neonatal ICU', 'Growth Monitoring', 'Pediatric Emergency', 'Vaccination'],
-  },
-  {
-    label: 'peadatric',
-    icon: 'people',
-    image: 'images/dept-peadatric.jpg',
-    description:
-  'Compassionate and specialized care for infants, children, and adolescents—covering routine check-ups, vaccinations, growth and development, diagnosis, and treatment under one roof.',
-
-tags: ['Child Care', 'Newborn Care', 'Vaccination', 'Growth & Development'],
+      'A 24-hour Level III NICU for premature and critically ill newborns, and dedicated paediatric care as your child grows, from vaccinations to emergencies.',
+    tags: ['Level III NICU', 'Preterm Care', 'HFNC & CPAP', 'Vaccination', 'Growth Monitoring', 'Jaundice Care'],
   },
 ];
 
@@ -61,10 +62,10 @@ export default function Departments() {
               }`}
               aria-pressed={selected}
             >
-              <PlaceholderImage
-                icon={dept.icon}
-                file={dept.image}
+              <CoverImage
+                src={dept.image}
                 tone={selected ? 'dark' : 'light'}
+                sizes="(min-width: 640px) 33vw, 100vw"
                 className="aspect-[4/3] w-full rounded-2xl"
               />
               <span
@@ -83,13 +84,17 @@ export default function Departments() {
         <div className="max-w-sm">
           <h3 className="text-xl font-semibold text-neutral-950">{current.label}</h3>
           <p className="mt-3 text-sm leading-relaxed text-neutral-500">{current.description}</p>
+          <Link href={current.href} className="text-link mt-4">
+            Learn more<span className="sr-only"> about {current.label}</span>
+            <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
         <div className="hidden w-px bg-neutral-200 lg:block" />
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {current.tags.map((tag) => (
             <span
               key={tag}
-              className="flex items-center justify-center rounded-full border border-navy-200 px-4 py-2.5 text-sm font-medium text-navy-800"
+              className="flex items-center justify-center rounded-full border border-navy-200 px-4 py-2.5 text-center text-sm font-medium text-navy-800"
             >
               {tag}
             </span>

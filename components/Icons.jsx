@@ -106,6 +106,30 @@ export function PlusMinusIcon({ open, ...props }) {
   );
 }
 
+export function ArrowRightIcon(props) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" {...props}>
+      <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function ArrowLeftIcon(props) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" {...props}>
+      <path d="M16 10H4M9 5l-5 5 5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function PlayIcon(props) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" {...props}>
+      <path d="M6.5 4.3v11.4a.8.8 0 0 0 1.2.7l9-5.7a.8.8 0 0 0 0-1.4l-9-5.7a.8.8 0 0 0-1.2.7Z" />
+    </svg>
+  );
+}
+
 export function ExternalLinkIcon(props) {
   return (
     <svg viewBox="0 0 16 16" fill="none" {...props}>

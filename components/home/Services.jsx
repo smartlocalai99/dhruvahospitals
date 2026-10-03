@@ -1,49 +1,6 @@
 import Link from 'next/link';
-import PlaceholderImage from '../PlaceholderImage';
-
-const services = [
-  {
-    title: 'Maternity & Gynaecology Care',
-    description: 'Complete support for prenatal wellness, safe deliveries, and advanced reproductive health.',
-    image: 'images/service-maternity.jpg',
-  },
-
-   {
-  title: 'Emergency Care',
-  description: 'Fast, reliable medical care for urgent conditions and unexpected health emergencies.',
-  image: 'images/service-emergency.jpg',
-},
-  {
-    title: 'Pediatric Emergency & Child Care',
-    description: 'Specialized care for infants and children, from acute fevers to emergencies.',
-    image: 'images/service-pediatric.jpg',
-  },
-  {
-    title: 'General Medicine & Diagnostics',
-    description: 'Expert consultation and diagnostics for chronic conditions and everyday health concerns.',
-    image: "images/service-diagnostics.jpg",
-  },
-  {
-    title: 'Surgical & Laparoscopic Care',
-    description: 'Safe, minimally invasive procedures supported by experienced surgeons and modern operation theaters.',
-    image: 'images/service-diagnostics.jpg',
-  },
-  {
-    title: 'Critical Care & ICU Support',
-    description: 'Close monitoring and coordinated treatment for patients who need intensive medical attention.',
-    image: 'images/service-emergency.jpg',
-  },
-  {
-    title: 'Neonatal & Newborn Care',
-    description: 'Specialized support for newborns with attentive monitoring from experienced pediatric clinicians.',
-    image: 'images/service-pediatric.jpg',
-  },
-  {
-    title: 'Preventive Health Checkups',
-    description: 'Thoughtful consultations and diagnostic screening to help your family stay ahead of health concerns.',
-    image: 'images/service-maternity.jpg',
-  },
-];
+import CoverImage from '../CoverImage';
+import { services } from '@/lib/data';
 
 export default function Services() {
   return (
@@ -64,20 +21,20 @@ export default function Services() {
 
         <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
           {services.map((service) => (
-            <div key={service.title} className="flex items-start gap-5">
-              <PlaceholderImage
-                icon="photo"
-                file={service.image}
+            <div key={service.slug} className="flex items-start gap-5">
+              <CoverImage
+                src={service.image}
+                sizes="112px"
                 className="h-24 w-24 flex-none rounded-2xl sm:h-28 sm:w-28"
               />
               <div>
                 <h3 className="text-lg font-semibold text-neutral-950">{service.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-500">{service.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-500">{service.summary}</p>
                 <Link
-                  href="/facilities"
+                  href={`/services/${service.slug}`}
                   className="mt-3 inline-flex text-sm font-semibold text-navy-700 transition-colors hover:text-navy-900"
                 >
-                  Read more
+                  Read more<span className="sr-only"> about {service.title}</span>
                 </Link>
               </div>
             </div>
@@ -85,8 +42,8 @@ export default function Services() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link href="/facilities" className="btn-primary">
-            View all facilities
+          <Link href="/services" className="btn-primary">
+            View all services
           </Link>
         </div>
       </div>

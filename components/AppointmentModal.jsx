@@ -1,52 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
+import AppointmentForm from './AppointmentForm';
 
-const initialForm = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phone: '',
-  symptoms: '',
-};
+const focusableSelector =
+  'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export default function AppointmentModal({ onClose }) {
-  const [form, setForm] = useState(initialForm);
-  const [status, setStatus] = useState('idle');
-  const [message, setMessage] = useState('');
+  const dialogRef = useRef(null);
+  const onCloseRef = useRef(onClose);
 
-  function handleChange(event) {
-    setForm((current) => ({
-      ...current,
-      [event.target.name]: event.target.value,
-    }));
-    setStatus('idle');
-    setMessage('');
-  }
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setStatus('sending');
-    setMessage('');
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.querySelector('input:not([tabindex="-1"])')?.focus();
 
-    try {
-      const response = await fetch('/api/book-appointment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Unable to send your request.');
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        onCloseRef.current();
+        return;
       }
+      if (event.key !== 'Tab' || !dialogRef.current) return;
 
-      setStatus('success');
-      setMessage('Thank you. The hospital team will contact you shortly.');
-      setForm(initialForm);
-    } catch (error) {
-      setStatus('error');
-      setMessage(error.message);
+      const focusable = [...dialogRef.current.querySelectorAll(focusableSelector)].filter(
+        (element) => element.offsetParent !== null
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
-  }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = overflow;
+      if (previouslyFocused instanceof HTMLElement && previouslyFocused.isConnected) previouslyFocused.focus();
+    };
+  }, []);
 
   return (
     <div
@@ -57,6 +59,7 @@ export default function AppointmentModal({ onClose }) {
       }}
     >
       <div
+        ref={dialogRef}
         className="relative my-auto w-full max-w-xl rounded-2xl bg-white p-6 shadow-xl sm:p-8"
         role="dialog"
         aria-modal="true"
@@ -78,41 +81,7 @@ export default function AppointmentModal({ onClose }) {
           Share your details and our hospital team will get back to you.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div>
-              <label htmlFor="modal-firstName" className="field-label">First Name*</label>
-              <input id="modal-firstName" name="firstName" required value={form.firstName} onChange={handleChange} className="field-input" placeholder="First name" />
-            </div>
-            <div>
-              <label htmlFor="modal-lastName" className="field-label">Last Name*</label>
-              <input id="modal-lastName" name="lastName" required value={form.lastName} onChange={handleChange} className="field-input" placeholder="Last name" />
-            </div>
-            <div>
-              <label htmlFor="modal-email" className="field-label">Email</label>
-              <input id="modal-email" name="email" type="email" value={form.email} onChange={handleChange} className="field-input" placeholder="you@example.com" />
-            </div>
-            <div>
-              <label htmlFor="modal-phone" className="field-label">Contact Number*</label>
-              <input id="modal-phone" name="phone" type="tel" required value={form.phone} onChange={handleChange} className="field-input" placeholder="+91 12345 67890" />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="modal-symptoms" className="field-label">Explain the symptoms*</label>
-            <textarea id="modal-symptoms" name="symptoms" required rows={4} value={form.symptoms} onChange={handleChange} className="field-input resize-none" placeholder="Write something..." />
-          </div>
-
-          <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60">
-            {status === 'sending' ? 'Sending...' : 'Send request'}
-          </button>
-
-          {message && (
-            <p className={`text-center text-sm ${status === 'error' ? 'text-red-600' : 'text-green-700'}`} role="status">
-              {message}
-            </p>
-          )}
-        </form>
+        <AppointmentForm idPrefix="modal" variant="modal" />
       </div>
     </div>
   );
