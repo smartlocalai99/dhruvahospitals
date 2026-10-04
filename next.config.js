@@ -37,6 +37,8 @@ const nextConfig = {
       { source: '/neonatal-care', destination: '/services/neonatal', permanent: true },
       { source: '/privacy-policy', destination: '/privacy', permanent: true },
       { source: '/terms-of-service', destination: '/terms', permanent: true },
+      // Appointments are booked by phone; send old booking links to the contact numbers.
+      { source: '/book-appointment', destination: '/contact', permanent: true },
     ];
   },
 };

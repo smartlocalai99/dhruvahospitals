@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import DoctorCard from '@/components/DoctorCard';
+import BookCallButton from '@/components/BookCallButton';
 import { CheckIcon } from '@/components/Icons';
 import { doctors } from '@/lib/data';
 
@@ -40,9 +40,7 @@ export default function DoctorsPage() {
         </div>
 
         <div className="mt-12 flex justify-center">
-          <Link href="/book-appointment" className="btn-primary">
-            Book an appointment
-          </Link>
+          <BookCallButton />
         </div>
 
         <div className="mt-20 border-t border-neutral-100 pt-16">

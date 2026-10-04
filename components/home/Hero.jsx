@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import CoverImage from '../CoverImage';
 import CountUp from '../CountUp';
+import BookCallButton from '../BookCallButton';
 import { StarIcon, GoogleGIcon } from '../Icons';
 
 const avatars = ['/images/avatar-1.jpg', '/images/avatar-2.jpg', '/images/avatar-3.jpg'];
@@ -31,9 +32,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
-            <Link href="/book-appointment" className="btn-primary">
-              Book an appointment
-            </Link>
+            <BookCallButton />
             <Link href="/doctors" className="text-sm font-semibold text-neutral-900 hover:text-navy-700">
               Meet doctors
             </Link>

@@ -9,7 +9,6 @@ const staticPaths = [
   '/dhruva-speaks',
   '/about',
   '/contact',
-  '/book-appointment',
   '/privacy',
   '/terms',
 ];

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import AppointmentModal from './AppointmentModal';
+import BookCallButton from './BookCallButton';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -22,16 +22,9 @@ function isActive(pathname, href) {
 export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [appointmentOpen, setAppointmentOpen] = useState(false);
-
-  function openAppointment() {
-    setOpen(false);
-    setAppointmentOpen(true);
-  }
 
   return (
-    <>
-      <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/95 backdrop-blur">
       <div className="container-page flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <Image
@@ -63,9 +56,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <button type="button" onClick={openAppointment} className="btn-primary">
-            Book now
-          </button>
+          <BookCallButton label="Book now" />
         </div>
 
         <button
@@ -119,16 +110,11 @@ export default function Navbar() {
               );
             })}
 
-            <button type="button" onClick={openAppointment} className="btn-primary mt-2 w-full">
-              Book now
-            </button>
+            <BookCallButton label="Book now" className="btn-primary mt-2 w-full" onClick={() => setOpen(false)} />
           </nav>
         </div>
       )}
 
-      </header>
-
-      {appointmentOpen && <AppointmentModal onClose={() => setAppointmentOpen(false)} />}
-    </>
+    </header>
   );
 }

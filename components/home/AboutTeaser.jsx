@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import CoverImage from '../CoverImage';
 import CountUp from '../CountUp';
+import BookCallButton from '../BookCallButton';
 import { CheckIcon } from '../Icons';
 import { stats } from '@/lib/data';
 
@@ -38,9 +38,7 @@ export default function AboutTeaser() {
             ))}
           </div>
 
-          <Link href="/book-appointment" className="btn-primary mt-9">
-            Book an appointment
-          </Link>
+          <BookCallButton className="btn-primary mt-9" />
         </div>
 
         <CoverImage

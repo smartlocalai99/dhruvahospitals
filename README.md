@@ -18,10 +18,7 @@ Copy `.env.example` to `.env.local` and fill in the values. On Vercel, add them 
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Public URL, e.g. `https://www.dhruvahospitals.com`. Used for canonical links, social previews, the sitemap and structured data. On Vercel it defaults to the project's production domain. |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM` | Mail server used to send appointment requests. For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833). |
-| `APPOINTMENT_RECIPIENT_EMAIL` | Inbox that receives appointment requests. |
-
-If SMTP is not configured, the booking form shows visitors the phone and WhatsApp numbers instead.
+Appointments are booked by phone: every "Book now" / "Book an appointment" button calls `site.phones.main` in `lib/site.js`.
 
 ## Editing content
 
@@ -46,4 +43,4 @@ Images are served through `next/image`, so they are resized and compressed autom
 
 - `/sitemap.xml` and `/robots.txt` are generated from the routes and data above.
 - Pages include canonical URLs, Open Graph/Twitter tags and schema.org data (Hospital, Physician, FAQ, breadcrumbs).
-- Old URLs from the previous site (`/neonatal`, `/neonatal-care`, `/privacy-policy`) redirect to their new pages (`next.config.js`).
+- Old URLs (`/neonatal`, `/neonatal-care`, `/privacy-policy`, `/book-appointment`) redirect to their new pages (`next.config.js`).

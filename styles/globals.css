@@ -50,14 +50,6 @@ body {
   @apply flex h-5 w-5 flex-none items-center justify-center rounded-full bg-navy-50 text-navy-700;
 }
 
-.field-label {
-  @apply mb-2 block text-sm font-medium text-neutral-900;
-}
-
-.field-input {
-  @apply w-full rounded-xl border-0 bg-navy-50 px-4 py-3.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline focus:outline-2 focus:outline-offset-1 focus:outline-navy-500;
-}
-
 .info-card {
   @apply rounded-2xl bg-navy-50 p-6;
 }

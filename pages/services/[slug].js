@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import CoverImage from '@/components/CoverImage';
 import DoctorCard from '@/components/DoctorCard';
+import BookCallButton from '@/components/BookCallButton';
 import EmergencyBanner from '@/components/EmergencyBanner';
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from '@/components/Icons';
 import { getDoctor, getService, services, whyChooseUs } from '@/lib/data';
@@ -77,9 +78,7 @@ export default function ServicePage({ slug }) {
               <p className="mt-2 text-sm leading-relaxed text-navy-100">
                 Consult our specialists for a personalised treatment plan tailored to your needs.
               </p>
-              <Link href={`/book-appointment?service=${slug}`} className="btn-light mt-6 w-full">
-                Book an appointment
-              </Link>
+              <BookCallButton className="btn-light mt-6 w-full" />
               <div className="mt-6 border-t border-white/15 pt-5 text-sm text-navy-100">
                 <p>24/7 Emergency</p>
                 <a href={site.phones.emergency.href} className="mt-1 block text-lg font-semibold text-white hover:underline">

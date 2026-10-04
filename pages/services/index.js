@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import ServiceCard from '@/components/ServiceCard';
+import BookCallButton from '@/components/BookCallButton';
 import { services } from '@/lib/data';
 import { site } from '@/lib/site';
 import { breadcrumbSchema } from '@/lib/schema';
@@ -36,15 +36,8 @@ export default function ServicesPage() {
             Our specialists are available for routine check-ups and critical consultations alike. Experience healthcare that prioritises your recovery.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
-            <Link href="/book-appointment" className="btn-light">
-              Book an appointment
-            </Link>
-            <a
-              href={site.phones.main.href}
-              className="inline-flex items-center justify-center rounded-2xl border border-white/60 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-            >
-              Call: {site.phones.main.display}
-            </a>
+            <BookCallButton className="btn-light" />
+            <span className="text-sm font-semibold text-white">{site.phones.main.display}</span>
           </div>
         </div>
       </section>

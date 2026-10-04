@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import CoverImage from '@/components/CoverImage';
 import DoctorCard from '@/components/DoctorCard';
+import BookCallButton from '@/components/BookCallButton';
 import { ArrowLeftIcon, CheckIcon } from '@/components/Icons';
 import { doctors, getDoctor, getService, hasProfile } from '@/lib/data';
 import { site } from '@/lib/site';
@@ -118,12 +119,8 @@ export default function DoctorProfilePage({ slug }) {
             </dl>
 
             <div className="mt-10 flex flex-wrap items-center gap-6">
-              <Link href={`/book-appointment?doctor=${slug}`} className="btn-primary">
-                Book an appointment
-              </Link>
-              <a href={site.phones.main.href} className="text-sm font-semibold text-neutral-900 hover:text-navy-700">
-                Call {site.phones.main.display}
-              </a>
+              <BookCallButton />
+              <span className="text-sm font-semibold text-neutral-900">{site.phones.main.display}</span>
             </div>
           </div>
         </div>

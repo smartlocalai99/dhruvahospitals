@@ -33,8 +33,7 @@ export default function TermsPage() {
 
           <h2>3. Appointment Policy</h2>
           <p>
-            Appointments requested online are subject to confirmation based on specialist availability. A request is confirmed
-            only when our team contacts you.
+            Appointments are booked by phone and are subject to confirmation based on specialist availability.
           </p>
 
           <h2>4. Accuracy of Information</h2>

@@ -27,11 +27,8 @@ export default function PrivacyPage() {
           <h2>2. Information We Collect</h2>
           <ul>
             <li>
-              <strong>Appointment requests:</strong> your name, contact number, email address (optional), preferred department
-              and doctor, and the symptoms or reason for your visit that you choose to share.
-            </li>
-            <li>
-              <strong>Communications:</strong> information you share when you call, email or message us on WhatsApp.
+              <strong>Calls and messages:</strong> information you share when you call, email or message us, such as your
+              name, contact number and the reason for your visit.
             </li>
             <li>
               <strong>Technical data:</strong> like most websites, our hosting provider may log basic technical information such
@@ -41,7 +38,7 @@ export default function PrivacyPage() {
 
           <h2>3. How We Use Your Information</h2>
           <ul>
-            <li>To respond to your appointment request and schedule your visit.</li>
+            <li>To schedule your appointment and answer your questions.</li>
             <li>To contact you about your request or care.</li>
             <li>To keep our website secure and improve our services.</li>
           </ul>
@@ -49,8 +46,8 @@ export default function PrivacyPage() {
 
           <h2>4. Sharing Your Information</h2>
           <p>
-            Appointment requests are sent by email to our hospital team. We share information only with staff and service providers
-            who need it to respond to you, such as our email and website hosting providers, or where required by law.
+            We share information only with staff and service providers who need it to respond to you, such as our website hosting
+            provider, or where required by law.
           </p>
 
           <h2>5. Third-Party Content</h2>
@@ -67,14 +64,14 @@ export default function PrivacyPage() {
 
           <h2>7. Your Choices</h2>
           <p>
-            You can ask us to access, correct or delete the personal information you have shared through this website by emailing{' '}
+            You can ask us to access, correct or delete the personal information you have shared with us by emailing{' '}
             <a href={`mailto:${site.email}`}>{site.email}</a> or calling{' '}
             <a href={site.phones.main.href}>{site.phones.main.display}</a>.
           </p>
 
           <h2>8. Emergencies</h2>
           <p>
-            Please do not use the online form for medical emergencies. Call our 24/7 emergency line at{' '}
+            For medical emergencies, call our 24/7 emergency line at{' '}
             <a href={site.phones.emergency.href}>{site.phones.emergency.display}</a>.
           </p>
 
