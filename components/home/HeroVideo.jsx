@@ -70,7 +70,10 @@ async function chooseSource() {
 const teamPreview = doctors.slice(0, 3);
 
 const glassCard =
-  'flex items-center gap-3 rounded-2xl bg-white/10 px-3 py-2.5 text-left ring-1 ring-inset ring-white/20 backdrop-blur-md transition-colors hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-4 sm:py-3';
+  'flex items-center gap-3 rounded-2xl bg-navy-900/70 px-3 py-2.5 text-left ring-1 ring-inset ring-white/15 backdrop-blur-md transition-colors hover:bg-navy-900/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-4 sm:py-3';
+
+// Events that count as a user gesture for media playback.
+const GESTURE_EVENTS = ['touchend', 'click', 'keydown'];
 
 function whenIdle(callback) {
   if ('requestIdleCallback' in window) {
@@ -123,29 +126,63 @@ export default function HeroVideo() {
     };
   }, []);
 
-  // Play the chosen file, and pause whenever the section is scrolled out of view.
+  // Play the chosen file while the section is on screen, and pause it when scrolled away.
   useEffect(() => {
     const video = videoRef.current;
     if (!source || !video) return undefined;
 
-    video.muted = true;
-    if (!pausedByUser.current) {
-      video.play().catch(() => {
-        pausedByUser.current = true;
-        setPaused(true);
-      });
-    }
+    let inView = false;
+    let waitingForGesture = false;
+
+    // Some browsers refuse muted autoplay (iOS Low Power Mode, in-app browsers such as
+    // WhatsApp or Instagram) but allow playback after any tap, so retry on the first one.
+    const retryAfterGesture = (event) => {
+      if (event.target.closest?.('[data-video-toggle]')) return; // the play button handles itself
+      stopWaiting();
+      if (inView && !pausedByUser.current) tryPlay();
+    };
+    const stopWaiting = () => {
+      waitingForGesture = false;
+      GESTURE_EVENTS.forEach((type) => window.removeEventListener(type, retryAfterGesture, true));
+    };
+    const tryPlay = () => {
+      video.muted = true;
+      video
+        .play()
+        .then(() => setPaused(false))
+        .catch((error) => {
+          if (error.name !== 'NotAllowedError' || pausedByUser.current) return;
+          setPaused(true);
+          if (waitingForGesture) return;
+          waitingForGesture = true;
+          GESTURE_EVENTS.forEach((type) =>
+            window.addEventListener(type, retryAfterGesture, { capture: true, passive: true })
+          );
+        });
+    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        inView = entry.isIntersecting;
         if (pausedByUser.current) return;
-        if (entry.isIntersecting) video.play().catch(() => {});
+        if (inView) tryPlay();
         else video.pause();
       },
       { threshold: 0.2 }
     );
     observer.observe(video);
-    return () => observer.disconnect();
+
+    // Phones pause video when the visitor switches apps; pick up again when they come back.
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && inView && !pausedByUser.current) tryPlay();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      observer.disconnect();
+      stopWaiting();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, [source]);
 
   async function togglePlayback() {
@@ -199,38 +236,34 @@ export default function HeroVideo() {
         onPlaying={() => setPlaying(true)}
       />
 
-      {/* Navy overlay: an even tint, deepest behind the text (bottom on phones, left side on large screens). */}
-      <div className="absolute inset-0 bg-navy-900/25" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/55 to-navy-900/30 lg:bg-gradient-to-r lg:from-navy-900/85 lg:via-navy-900/45 lg:to-navy-900/10" />
-      <div className="absolute inset-x-0 bottom-0 hidden h-1/2 bg-gradient-to-t from-navy-900/70 to-transparent lg:block" />
-
-      {/* Text sits bottom-left; the glass cards sit bottom-right on large screens and under the button on smaller ones. */}
+      {/* No overlay on the video: the text sits on its own frosted navy panel so it stays readable over bright frames.
+          Panel bottom-left; the glass cards sit bottom-right on large screens and under the panel on smaller ones. */}
       <div className="container-page relative z-10 flex flex-col justify-end pb-10 pt-32 lg:flex-row lg:items-end lg:justify-between lg:gap-12 lg:pb-[10svh] [@media(max-height:500px)]:pb-6 [@media(max-height:500px)]:pt-24">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl rounded-3xl bg-navy-900/70 p-6 ring-1 ring-inset ring-white/15 backdrop-blur-md sm:p-8 lg:p-10 [@media(max-height:500px)]:p-5">
           <h2
             id="hero-video-title"
-            className="text-balance text-[clamp(2.25rem,10.5vw,2.75rem)] font-semibold leading-[1.04] tracking-[-0.02em] sm:text-6xl lg:text-7xl [@media(max-height:500px)]:text-4xl"
+            className="text-balance text-[clamp(2rem,9vw,2.5rem)] font-semibold leading-[1.04] tracking-[-0.02em] sm:text-6xl lg:text-7xl [@media(max-height:500px)]:text-4xl"
           >
             Advanced care, close to home
           </h2>
-          <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg [@media(max-height:500px)]:mt-3 [@media(max-height:500px)]:text-base">
+          <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg [@media(max-height:500px)]:mt-3 [@media(max-height:500px)]:text-base">
             IVF and fertility treatment, safe deliveries, a Level III NICU and 24/7 emergency care, all under one roof
             in Kadapa.
           </p>
           <BookCallButton
             label="Book Appointment"
-            className="btn-light mt-8 sm:mt-10 [@media(max-height:500px)]:mt-5"
+            className="mt-7 inline-flex w-full items-center justify-center rounded-2xl bg-navy-500 px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-inset ring-white/20 transition-colors hover:bg-navy-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:mt-8 sm:w-auto sm:py-3 [@media(max-height:500px)]:mt-4"
           />
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:max-w-md lg:mt-0 lg:w-72 lg:max-w-none lg:flex-none lg:grid-cols-1 [@media(max-height:500px)]:hidden">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:max-w-lg lg:mt-0 lg:w-72 lg:max-w-none lg:flex-none lg:grid-cols-1 [@media(max-height:500px)]:hidden">
           <a href={site.phones.emergency.href} className={glassCard}>
             <span className="hidden h-10 w-10 flex-none items-center justify-center rounded-full bg-white/15 sm:flex">
               <PhoneIcon className="h-5 w-5" aria-hidden="true" />
             </span>
             <span className="min-w-0">
               <span className="block text-sm font-semibold">24/7 Emergency</span>
-              <span className="block text-xs text-white/75 sm:text-sm">{site.phones.emergency.display}</span>
+              <span className="block text-xs text-white/80 sm:text-sm">{site.phones.emergency.display}</span>
             </span>
           </a>
 
@@ -251,7 +284,7 @@ export default function HeroVideo() {
             </span>
             <span className="min-w-0">
               <span className="block text-sm font-semibold">15+ specialists</span>
-              <span className="block text-xs text-white/75 sm:text-sm">Meet our doctors</span>
+              <span className="block text-xs text-white/80 sm:text-sm">Meet our doctors</span>
             </span>
           </Link>
         </div>
@@ -259,9 +292,10 @@ export default function HeroVideo() {
 
       <button
         type="button"
+        data-video-toggle
         onClick={togglePlayback}
         aria-label={paused ? 'Play background video' : 'Pause background video'}
-        className="absolute right-4 top-24 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white ring-1 ring-white/30 backdrop-blur-md transition-colors hover:bg-white/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-6 lg:right-8"
+        className="absolute right-4 top-24 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-navy-900/60 text-white ring-1 ring-white/30 backdrop-blur-md transition-colors hover:bg-navy-900/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-6 lg:right-8"
       >
         {paused ? <PlayIcon className="ml-0.5 h-4 w-4" aria-hidden="true" /> : <PauseIcon className="h-4 w-4" aria-hidden="true" />}
       </button>
