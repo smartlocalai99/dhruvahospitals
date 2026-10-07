@@ -37,6 +37,16 @@ All photos live in `public/images/`. To update one, replace the file and keep th
 - Hospital photos: `public/images/gallery/`.
 - Social preview image: `public/og-image.jpg` (1200 × 630 px).
 
+### Hero video
+
+The home page hero plays `public/videos/hero-*.mp4` (1920×1080 for desktop, a 720×1280 portrait crop for phones), each in AV1 with an H.264 fallback, with matching poster frames in `public/images/hero-poster*.jpg`. The 4K original lives in `media-source/` (git-ignored). To replace the video, re-encode it into the same four files and two posters, for example:
+
+```bash
+ffmpeg -i source.mov -an -vf "scale=1920:1080" -c:v libsvtav1 -preset 6 -crf 34 -g 60 -movflags +faststart public/videos/hero-desktop-av1.mp4
+ffmpeg -i source.mov -an -vf "scale=1920:1080" -c:v libx264 -preset slow -crf 23 -g 60 -movflags +faststart public/videos/hero-desktop-h264.mp4
+# phones: add a centre crop first, e.g. -vf "crop=ih*9/16:ih,scale=720:1280"
+```
+
 Images are served through `next/image`, so they are resized and compressed automatically.
 
 ## SEO

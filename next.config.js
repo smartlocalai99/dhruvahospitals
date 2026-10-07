@@ -28,7 +28,14 @@ const nextConfig = {
     remotePatterns: [{ protocol: 'https', hostname: 'i.ytimg.com' }],
   },
   async headers() {
-    return [{ source: '/:path*', headers: securityHeaders }];
+    return [
+      { source: '/:path*', headers: securityHeaders },
+      {
+        // Hero videos are large; let browsers keep them for a day instead of re-checking every visit.
+        source: '/videos/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' }],
+      },
+    ];
   },
   async redirects() {
     // Keep links from the previous dhruvahospitals.com site working.

@@ -130,6 +130,15 @@ export function PlayIcon(props) {
   );
 }
 
+export function PauseIcon(props) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" {...props}>
+      <rect x="5" y="4" width="3.5" height="12" rx="1" />
+      <rect x="11.5" y="4" width="3.5" height="12" rx="1" />
+    </svg>
+  );
+}
+
 export function ExternalLinkIcon(props) {
   return (
     <svg viewBox="0 0 16 16" fill="none" {...props}>

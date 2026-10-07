@@ -62,10 +62,10 @@ export default function CountUp({ value, duration = 1600 }) {
     <span ref={ref} data-countup={status} className="relative inline-block whitespace-nowrap">
       <span className="sr-only">{value}</span>
       {/* Reserves the final width so nearby text doesn't shift while counting. */}
-      <span aria-hidden="true" className="invisible">
+      <span aria-hidden="true" className="invisible select-none">
         {value}
       </span>
-      <span aria-hidden="true" data-countup-value className="absolute left-0 top-0">
+      <span aria-hidden="true" data-countup-value className="absolute left-0 top-0 select-none">
         {formatNumber(current, grouped)}
         {suffix}
       </span>

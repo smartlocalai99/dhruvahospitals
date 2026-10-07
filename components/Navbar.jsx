@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookCallButton from './BookCallButton';
 
 const navLinks = [
@@ -22,9 +22,42 @@ function isActive(pathname, href) {
 export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const isHome = router.pathname === '/';
+  const [overHero, setOverHero] = useState(isHome);
+
+  // On the home page the header floats over the hero video as frosted glass,
+  // then turns more opaque once the video has scrolled away.
+  useEffect(() => {
+    if (!isHome) {
+      setOverHero(false);
+      return undefined;
+    }
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setOverHero(window.scrollY < window.innerHeight - 120);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      cancelAnimationFrame(frame);
+    };
+  }, [isHome]);
+
+  const glass = overHero && !open;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/95 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 border-b backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ${
+        glass ? 'border-white/25 bg-white/60' : 'border-neutral-200/70 bg-white/80'
+      }`}
+    >
       <div className="container-page flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <Image
@@ -46,7 +79,11 @@ export default function Navbar() {
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
                 className={`text-[15px] font-medium transition-colors ${
-                  active ? 'text-neutral-400' : 'text-neutral-800 hover:text-navy-700'
+                  active
+                    ? glass
+                      ? 'text-navy-700'
+                      : 'text-neutral-400'
+                    : 'text-neutral-800 hover:text-navy-700'
                 }`}
               >
                 {link.label}
@@ -61,7 +98,9 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 lg:hidden"
+          className={`flex h-10 w-10 items-center justify-center rounded-full border lg:hidden ${
+            glass ? 'border-white/60 bg-white/40' : 'border-neutral-200'
+          }`}
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -88,7 +127,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="border-t border-neutral-100 bg-white lg:hidden">
+        <div id="mobile-menu" className="border-t border-neutral-100 bg-white/95 lg:hidden">
           <nav
             className="container-page flex flex-col gap-1 py-4"
             aria-label="Primary mobile"

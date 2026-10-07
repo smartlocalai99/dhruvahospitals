@@ -1,5 +1,7 @@
 import Layout from '@/components/Layout';
+import HeroVideo from '@/components/home/HeroVideo';
 import Hero from '@/components/home/Hero';
+import HealthTips from '@/components/HealthTips';
 import Departments from '@/components/home/Departments';
 import Services from '@/components/home/Services';
 import FacilitiesTeaser from '@/components/home/FacilitiesTeaser';
@@ -17,7 +19,9 @@ export default function Home() {
       description="Dhruva Hospitals in Kadapa offers fertility & IVF, pregnancy and gynaecology care, a Level III NICU, paediatrics, surgery and 24/7 emergency care. Book an appointment today."
       jsonLd={[hospitalSchema(), faqSchema(faqs)]}
     >
+      <HeroVideo />
       <Hero />
+      <HealthTips className="pt-20 sm:pt-28" />
       <Departments />
       <Services />
       <FacilitiesTeaser />

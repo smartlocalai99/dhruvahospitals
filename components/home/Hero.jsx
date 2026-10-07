@@ -86,7 +86,6 @@ export default function Hero() {
         <CoverImage
           src="/images/hero-care.jpg"
           alt="Doctors at Dhruva Hospitals, Kadapa"
-          priority
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-[4/3] w-full rounded-3xl"
         />
