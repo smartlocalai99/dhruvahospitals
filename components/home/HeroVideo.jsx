@@ -237,7 +237,7 @@ export default function HeroVideo() {
       />
 
       {/* No overlay on the video: the text sits on its own frosted navy panel so it stays readable over bright frames.
-          Panel bottom-left; the glass cards sit bottom-right on large screens and under the panel on smaller ones. */}
+          Panel bottom-left; the glass cards sit bottom-right on large screens, under the panel on tablets, and are hidden on phones. */}
       <div className="container-page relative z-10 flex flex-col justify-end pb-10 pt-32 lg:flex-row lg:items-end lg:justify-between lg:gap-12 lg:pb-[10svh] [@media(max-height:500px)]:pb-6 [@media(max-height:500px)]:pt-24">
         <div className="max-w-2xl rounded-3xl bg-navy-900/70 p-6 ring-1 ring-inset ring-white/15 backdrop-blur-md sm:p-8 lg:p-10 [@media(max-height:500px)]:p-5">
           <h2
@@ -256,7 +256,7 @@ export default function HeroVideo() {
           />
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:max-w-lg lg:mt-0 lg:w-72 lg:max-w-none lg:flex-none lg:grid-cols-1 [@media(max-height:500px)]:hidden">
+        <div className="mt-8 hidden grid-cols-2 gap-3 sm:grid sm:max-w-lg lg:mt-0 lg:w-72 lg:max-w-none lg:flex-none lg:grid-cols-1 [@media(max-height:500px)]:hidden">
           <a href={site.phones.emergency.href} className={glassCard}>
             <span className="hidden h-10 w-10 flex-none items-center justify-center rounded-full bg-white/15 sm:flex">
               <PhoneIcon className="h-5 w-5" aria-hidden="true" />
