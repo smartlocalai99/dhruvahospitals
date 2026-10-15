@@ -7,7 +7,9 @@ import BookCallButton from '@/components/BookCallButton';
 import { ArrowLeftIcon, CheckIcon } from '@/components/Icons';
 import { doctors, getDoctor, getService, hasProfile } from '@/lib/data';
 import { site } from '@/lib/site';
-import { breadcrumbSchema, physicianSchema } from '@/lib/schema';
+import { guidePath } from '@/lib/guide-languages';
+import { publishedGuides } from '@/lib/guides';
+import { breadcrumbSchema, hospitalSchema, physicianSchema } from '@/lib/schema';
 
 function CheckList({ items }) {
   return (
@@ -24,10 +26,19 @@ function CheckList({ items }) {
   );
 }
 
-export default function DoctorProfilePage({ slug }) {
+export default function DoctorProfilePage({ slug, reviewedGuides }) {
   const doctor = getDoctor(slug);
   const relatedServices = (doctor.services || []).map(getService).filter(Boolean);
   const otherDoctors = doctors.filter((item) => item.slug !== slug && hasProfile(item));
+  // Fact sheet: only rows the hospital has confirmed are shown.
+  const facts = [
+    { label: 'Specialisation', value: doctor.designation },
+    { label: 'Qualifications', value: doctor.credentials },
+    { label: 'Medical registration', value: doctor.registration },
+    { label: 'Languages', value: doctor.languages.join(', ') },
+    { label: 'OPD timings', value: doctor.opd },
+    { label: 'Teleconsultation', value: doctor.teleconsult },
+  ].filter((fact) => fact.value);
 
   return (
     <Layout
@@ -37,6 +48,7 @@ export default function DoctorProfilePage({ slug }) {
       imageAlt={doctor.name}
       jsonLd={[
         physicianSchema(doctor),
+        hospitalSchema(),
         breadcrumbSchema([
           { name: 'Home', path: '/' },
           { name: 'Doctors', path: '/doctors' },
@@ -96,10 +108,12 @@ export default function DoctorProfilePage({ slug }) {
             </div>
 
             <dl className="mt-8 grid gap-6 border-t border-neutral-100 pt-8 sm:grid-cols-2">
-              <div>
-                <dt className="text-sm font-semibold text-neutral-950">Languages</dt>
-                <dd className="mt-1 text-sm text-neutral-600">{doctor.languages.join(', ')}</dd>
-              </div>
+              {facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt className="text-sm font-semibold text-neutral-950">{fact.label}</dt>
+                  <dd className="mt-1 text-sm text-neutral-600">{fact.value}</dd>
+                </div>
+              ))}
               {relatedServices.length > 0 && (
                 <div>
                   <dt className="text-sm font-semibold text-neutral-950">Specialities</dt>
@@ -111,6 +125,22 @@ export default function DoctorProfilePage({ slug }) {
                         className="font-medium text-navy-700 hover:text-navy-900 hover:underline"
                       >
                         {service.title}
+                      </Link>
+                    ))}
+                  </dd>
+                </div>
+              )}
+              {reviewedGuides.length > 0 && (
+                <div className="sm:col-span-2">
+                  <dt className="text-sm font-semibold text-neutral-950">Patient guides reviewed</dt>
+                  <dd className="mt-1 flex flex-col gap-1 text-sm">
+                    {reviewedGuides.map((guide) => (
+                      <Link
+                        key={guide.slug}
+                        href={guidePath(guide.slug)}
+                        className="font-medium text-navy-700 hover:text-navy-900 hover:underline"
+                      >
+                        {guide.title}
                       </Link>
                     ))}
                   </dd>
@@ -148,5 +178,8 @@ export function getStaticPaths() {
 }
 
 export function getStaticProps({ params }) {
-  return { props: { slug: params.slug } };
+  const reviewedGuides = publishedGuides
+    .filter((guide) => guide.reviewer === params.slug && guide.reviewedOn)
+    .map((guide) => ({ slug: guide.slug, title: guide.en.title }));
+  return { props: { slug: params.slug, reviewedGuides } };
 }

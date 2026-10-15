@@ -9,8 +9,16 @@ import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from '@/components/Icons';
 import { getDoctor, getService, services, whyChooseUs } from '@/lib/data';
 import { site } from '@/lib/site';
 import { breadcrumbSchema } from '@/lib/schema';
+import { guidePath } from '@/lib/guide-languages';
+import { guideLinks } from '@/lib/guides';
 
-export default function ServicePage({ slug }) {
+// Patient guides linked from a service page's sidebar.
+const serviceGuides = {
+  pregnancy: ['delivering-in-kadapa-from-dubai', 'baby-birth-certificate-aadhaar-passport-nri', 'nicu-levels-of-care'],
+  neonatal: ['nicu-levels-of-care', 'baby-birth-certificate-aadhaar-passport-nri'],
+};
+
+export default function ServicePage({ slug, guides }) {
   const service = getService(slug);
   const specialists = service.doctors.map(getDoctor).filter(Boolean);
   const otherServices = services.filter((item) => item.slug !== slug);
@@ -87,6 +95,34 @@ export default function ServicePage({ slug }) {
               </div>
             </div>
 
+            {guides.length > 0 && (
+              <div className="rounded-3xl border border-navy-200 p-7">
+                <h2 className="text-lg font-semibold text-neutral-950">Patient Guides</h2>
+                <ul className="mt-4 divide-y divide-neutral-100">
+                  {guides.map((guide) => (
+                    <li key={guide.slug}>
+                      <Link
+                        href={guidePath(guide.slug)}
+                        className="group flex items-center justify-between gap-3 py-3 text-sm font-medium text-neutral-800 transition-colors hover:text-navy-700"
+                      >
+                        {guide.title}
+                        <ArrowRightIcon
+                          className="h-4 w-4 flex-none text-navy-300 transition-transform group-hover:translate-x-0.5 group-hover:text-navy-700"
+                          aria-hidden="true"
+                        />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                {slug === 'pregnancy' && (
+                  <Link href="/nri" className="text-link mt-4">
+                    Delivering here from abroad
+                    <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                )}
+              </div>
+            )}
+
             <div className="rounded-3xl border border-navy-200 p-7">
               <h2 className="text-lg font-semibold text-neutral-950">Why Choose Dhruva?</h2>
               <ul className="mt-5 space-y-3">
@@ -160,5 +196,5 @@ export function getStaticPaths() {
 }
 
 export function getStaticProps({ params }) {
-  return { props: { slug: params.slug } };
+  return { props: { slug: params.slug, guides: guideLinks('en', serviceGuides[params.slug] || []) } };
 }

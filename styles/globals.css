@@ -10,6 +10,12 @@ body {
   @apply font-sans text-neutral-900 antialiased;
 }
 
+/* Telugu text: Latin characters (numbers, NICU, WhatsApp) stay in Plus Jakarta Sans. */
+[lang='te'] {
+  font-family: var(--font-jakarta), var(--font-telugu), sans-serif;
+  line-height: 1.7;
+}
+
 .container-page {
   @apply mx-auto w-full px-6 lg:px-8;
 }

@@ -13,6 +13,8 @@ const pageLinks = [
   { href: '/facilities', label: 'Facilities' },
   { href: '/doctors', label: 'Doctors' },
   { href: '/dhruva-speaks', label: 'Dhruva Speaks' },
+  { href: '/guides', label: 'Patient Guides' },
+  { href: '/nri', label: 'NRI Care' },
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact Us' },
 ];

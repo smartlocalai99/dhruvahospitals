@@ -1,4 +1,6 @@
 import { doctors, hasProfile, services } from '@/lib/data';
+import { guidePath } from '@/lib/guide-languages';
+import { publishedGuides } from '@/lib/guides';
 import { absoluteUrl } from '@/lib/site';
 
 const staticPaths = [
@@ -7,6 +9,9 @@ const staticPaths = [
   '/facilities',
   '/doctors',
   '/dhruva-speaks',
+  '/nri',
+  '/guides',
+  '/te/guides',
   '/about',
   '/contact',
   '/privacy',
@@ -18,6 +23,7 @@ function buildSitemap() {
     ...staticPaths,
     ...services.map((service) => `/services/${service.slug}`),
     ...doctors.filter(hasProfile).map((doctor) => `/doctors/${doctor.slug}`),
+    ...publishedGuides.flatMap((guide) => [guidePath(guide.slug, 'en'), guidePath(guide.slug, 'te')]),
   ];
 
   const urls = paths.map((path) => `  <url>\n    <loc>${absoluteUrl(path)}</loc>\n  </url>`).join('\n');

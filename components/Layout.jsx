@@ -15,6 +15,8 @@ export default function Layout({
   imageAlt = 'Doctors at Dhruva Hospitals, Kadapa',
   jsonLd,
   noindex = false,
+  ogLocale = 'en_IN',
+  alternates = [], // [{ hrefLang: 'te-IN', path: '/te/...' }] for pages that exist in more than one language
   children,
 }) {
   const router = useRouter();
@@ -32,7 +34,10 @@ export default function Layout({
         <link rel="canonical" href={pageUrl} />
         {noindex && <meta name="robots" content="noindex" />}
         <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en_IN" />
+        <meta property="og:locale" content={ogLocale} />
+        {alternates.map((alternate) => (
+          <link key={alternate.hrefLang} rel="alternate" hrefLang={alternate.hrefLang} href={absoluteUrl(alternate.path)} />
+        ))}
         <meta property="og:site_name" content="Dhruva Hospitals" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
