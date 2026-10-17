@@ -2,14 +2,22 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import MobileActionBar from './MobileActionBar';
 import { site, absoluteUrl } from '@/lib/site';
 
 function serialize(schema) {
   return JSON.stringify(schema).replace(/</g, '\\u003c');
 }
 
+// Search engine ownership checks (Google Search Console, Bing Webmaster Tools). Set in Vercel; see README.
+const siteVerification = {
+  'google-site-verification': process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
+};
+
 export default function Layout({
   title,
+  fullTitle, // replaces the "Title | Dhruva Hospitals" pattern, e.g. on the home page
   description,
   image = '/og-image.jpg',
   imageAlt = 'Doctors at Dhruva Hospitals, Kadapa',
@@ -20,7 +28,7 @@ export default function Layout({
   children,
 }) {
   const router = useRouter();
-  const pageTitle = title ? `${title} | Dhruva Hospitals` : 'Dhruva Hospitals';
+  const pageTitle = fullTitle || (title ? `${title} | Dhruva Hospitals` : 'Dhruva Hospitals');
   const pageDescription = description || site.description;
   const pageUrl = absoluteUrl(router.asPath.split(/[?#]/)[0]);
   const imageUrl = absoluteUrl(image);
@@ -38,6 +46,12 @@ export default function Layout({
         {alternates.map((alternate) => (
           <link key={alternate.hrefLang} rel="alternate" hrefLang={alternate.hrefLang} href={absoluteUrl(alternate.path)} />
         ))}
+        {alternates.length > 0 && (
+          <link rel="alternate" hrefLang="x-default" href={absoluteUrl(alternates[0].path)} />
+        )}
+        {Object.entries(siteVerification).map(([name, content]) =>
+          content ? <meta key={name} name={name} content={content} /> : null
+        )}
         <meta property="og:site_name" content="Dhruva Hospitals" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
@@ -62,6 +76,7 @@ export default function Layout({
       <Navbar />
       <main id="main-content">{children}</main>
       <Footer />
+      <MobileActionBar />
     </>
   );
 }

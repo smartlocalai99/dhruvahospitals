@@ -9,6 +9,7 @@ import { site } from '@/lib/site';
 // Phones in portrait get a 720×1280 crop; everything else gets 1920×1080.
 // Each comes as AV1 (about 40% smaller) and H.264 (plays everywhere, hardware-decoded).
 const MOBILE_QUERY = '(max-width: 767px) and (orientation: portrait)';
+const VIDEO_START_DELAY_MS = 2000;
 const AV1_TYPE = 'video/mp4; codecs="av01.0.08M.08"';
 
 const SOURCES = {
@@ -100,9 +101,10 @@ export default function HeroVideo() {
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
 
-  // Start the video once the page has loaded and the browser is idle, so it never
-  // competes with the poster, fonts and scripts. Reduced-motion, data-saver and 2G
-  // visitors keep the poster (they can still press play).
+  // Start the video a moment after the page has loaded, once the browser is idle, so the
+  // multi-megabyte file never competes with the poster (the largest paint), fonts and scripts.
+  // The poster is the video's first frame, so the switch is seamless. Reduced-motion,
+  // data-saver and 2G visitors keep the poster (they can still press play).
   useEffect(() => {
     if (prefersStill()) {
       pausedByUser.current = true;
@@ -110,17 +112,21 @@ export default function HeroVideo() {
       return undefined;
     }
     let cancelIdle = () => {};
+    let timer = 0;
     let cancelled = false;
     const start = () => {
-      cancelIdle = whenIdle(async () => {
-        const src = await chooseSource();
-        if (!cancelled) setSource(src);
-      });
+      timer = window.setTimeout(() => {
+        cancelIdle = whenIdle(async () => {
+          const src = await chooseSource();
+          if (!cancelled) setSource(src);
+        });
+      }, VIDEO_START_DELAY_MS);
     };
     if (document.readyState === 'complete') start();
     else window.addEventListener('load', start, { once: true });
     return () => {
       cancelled = true;
+      window.clearTimeout(timer);
       cancelIdle();
       window.removeEventListener('load', start);
     };

@@ -22,7 +22,7 @@ export default function GuideIndex({ lang, items }) {
         { name: ui.indexTitle, path: basePath },
       ])}
     >
-      <div lang={lang}>
+      <div lang={lang} className={lang === 'te' ? 'telugu-page' : undefined}>
         <PageHeader eyebrow={ui.eyebrow} title={ui.indexTitle} subtitle={ui.indexSubtitle} />
 
         <section className="container-page py-16 sm:py-20">

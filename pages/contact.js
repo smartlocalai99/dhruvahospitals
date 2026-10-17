@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
@@ -10,7 +11,8 @@ import {
   ExternalLinkIcon,
 } from '@/components/Icons';
 import { site, callNumbers, whatsappLink, googleMapsUrl, googleMapsEmbedUrl } from '@/lib/site';
-import { hospitalSchema } from '@/lib/schema';
+import { breadcrumbSchema, hospitalSchema } from '@/lib/schema';
+import { opdInGulfTime } from '@/lib/nri';
 
 const linkClass = 'transition-colors hover:text-navy-700';
 
@@ -40,14 +42,20 @@ const infoCards = [
 export default function ContactPage() {
   return (
     <Layout
-      title="Contact Us"
-      description="Connect with Dhruva Hospitals, Kadapa for appointments, medical enquiries, or round-the-clock emergency support."
-      jsonLd={hospitalSchema()}
+      title="Contact & Directions in Kadapa"
+      description="Address, map, phone and WhatsApp for Dhruva Hospitals in Dwaraka Nagar, Kadapa, near the RTC bus stand. OPD 9 AM – 8 PM; 24/7 emergency on +91 90368 52311."
+      jsonLd={[
+        hospitalSchema(),
+        breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Contact', path: '/contact' },
+        ]),
+      ]}
     >
       {/* Page Header */}
       <PageHeader
         eyebrow="Contact Us"
-        title="Your Health Is Always Within Reach"
+        title="Contact Dhruva Hospitals, Kadapa"
         subtitle="Connect with Dhruva Hospitals for appointments, medical enquiries, or round-the-clock emergency support."
       />
 
@@ -103,8 +111,12 @@ export default function ContactPage() {
                 </h2>
 
                 <address className="mt-2 max-w-5xl text-sm not-italic leading-6 text-neutral-500">
-                  {site.address.full}.
+                  {site.name}, {site.address.full}.
                 </address>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
+                  We are in Dwaraka Nagar, near the RTC bus stand and beside Raithu Bazar in Kadapa. Kadapa airport is
+                  about 12 km away.
+                </p>
               </div>
             </div>
 
@@ -133,6 +145,17 @@ export default function ContactPage() {
             </div>
 
           </div>
+        </div>
+
+        <div className="mt-14 rounded-2xl border border-neutral-100 p-5 sm:p-6">
+          <h2 className="text-2xl font-bold text-neutral-950">Calling from Dubai, Kuwait or the UAE?</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
+            Call {site.phones.main.display} or WhatsApp us from any country. Our OPD hours ({site.hours.opd} India time)
+            are {opdInGulfTime[1].hours} in the UAE and {opdInGulfTime[2].hours} in Kuwait.
+          </p>
+          <Link href="/nri" className="mt-3 inline-flex text-sm font-semibold text-navy-700 hover:text-navy-900">
+            Arranging care in Kadapa from abroad
+          </Link>
         </div>
 
         <EmergencyBanner className="mt-14" />

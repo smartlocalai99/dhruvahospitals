@@ -5,8 +5,18 @@ import NriHelpCard from '@/components/guides/NriHelpCard';
 import { ArrowRightIcon, CheckIcon } from '@/components/Icons';
 import { formatDate, guideLanguages, guidePath } from '@/lib/guide-languages';
 import { guideLinks } from '@/lib/guides';
-import { airports, nriDesk, nriPackages, nriPackagesCheckedOn, nriSteps, recordChecklist } from '@/lib/nri';
-import { breadcrumbSchema } from '@/lib/schema';
+import {
+  airports,
+  familyCare,
+  nriDesk,
+  nriPackages,
+  nriPackagesCheckedOn,
+  nriSteps,
+  opdInGulfTime,
+  recordChecklist,
+} from '@/lib/nri';
+import { site } from '@/lib/site';
+import { breadcrumbSchema, faqSchema } from '@/lib/schema';
 
 const { ui } = guideLanguages.en;
 
@@ -41,26 +51,114 @@ const services = [
   },
 ];
 
+// Questions families abroad ask most. Shown on the page and as FAQPage data.
+const faqs = [
+  {
+    question: 'Can I book an appointment at Dhruva Hospitals from Dubai, Kuwait or the UAE?',
+    answer: `Yes. Call ${site.phones.main.display} or ${site.phones.mobile.display}, or WhatsApp ${site.phones.main.display}, from any country. Tell us who the appointment is for and when they will be in Kadapa.`,
+  },
+  {
+    question: 'What are the OPD hours in UAE and Kuwait time?',
+    answer: `The OPD runs ${site.hours.opd} India time: 7:30 AM – 6:30 PM in the UAE and Oman, and 6:30 AM – 5:30 PM in Kuwait, Saudi Arabia, Qatar and Bahrain. The emergency line, ${site.phones.emergency.display}, is answered 24/7.`,
+  },
+  {
+    question: 'Does Dhruva Hospitals have a clinic in Dubai, Kuwait or the UAE?',
+    answer: `No. Dhruva Hospitals is in Kadapa, Andhra Pradesh, India (${site.address.full}), and has no clinics in the Gulf. Families abroad book by phone or WhatsApp and visit us in Kadapa.`,
+  },
+  {
+    question: 'Can a relative in Kadapa book an appointment for my parents or children?',
+    answer: 'Yes. Anyone can book by phone or WhatsApp, and a relative can come with the patient to the appointment.',
+  },
+  {
+    question: 'Can I speak to the obstetrician before I travel to Kadapa to deliver?',
+    answer: 'Yes. After reviewing your reports, our desk books a pre-arrival video consultation with obstetrician Dr. S Mounika Reddy.',
+  },
+  {
+    question: 'Which airports are closest to Dhruva Hospitals?',
+    answer:
+      'Kadapa airport is about 12 km away. Tirupati (about 140 km), Bengaluru (about 260 km), Chennai (about 270 km) and Hyderabad (about 400 km) have more international flights.',
+  },
+];
+
 export default function NriPage({ guides }) {
   return (
     <Layout
-      title="Delivering in Kadapa from Abroad"
-      description="Plan your delivery at Dhruva Hospitals, Kadapa from the Gulf or anywhere abroad: WhatsApp NRI desk, pre-arrival video consult with the obstetrician, record review, attendant stay and airport pickup."
-      jsonLd={breadcrumbSchema([
-        { name: 'Home', path: '/' },
-        { name: 'NRI care', path: '/nri' },
-      ])}
+      title="Book a Doctor in Kadapa from Dubai, Kuwait or the UAE"
+      description="Living in Dubai, Kuwait or the UAE? Book a gynaecologist, paediatrician or delivery at Dhruva Hospitals in Kadapa by phone or WhatsApp. OPD hours in Gulf time."
+      jsonLd={[
+        breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Families abroad', path: '/nri' },
+        ]),
+        faqSchema(faqs),
+      ]}
     >
       <PageHeader
-        eyebrow="NRI care"
-        title="Having Your Baby in Kadapa While You Live Abroad"
-        subtitle="One WhatsApp desk to plan your delivery from the Gulf or anywhere abroad, from your first report to your baby’s passport."
+        eyebrow="For families abroad"
+        title="Arranging Care in Kadapa from Dubai, Kuwait or the UAE"
+        subtitle="Dhruva Hospitals is in Kadapa, India. Book from any country by phone or WhatsApp, for yourself, your parents or your children."
       />
 
       <section className="container-page py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1fr_340px] lg:gap-14">
           <div className="min-w-0">
-            <h2 className="text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">How it works</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">Booking from abroad</h2>
+            <p className="mt-4 text-sm leading-relaxed text-neutral-600 sm:text-base">
+              Dhruva Hospitals is in Kadapa, Andhra Pradesh, and has no clinics in the Gulf. You can still book from
+              anywhere: call{' '}
+              <a href={site.phones.main.href} className="font-semibold text-navy-700 hover:underline">
+                {site.phones.main.display}
+              </a>{' '}
+              or{' '}
+              <a href={site.phones.mobile.href} className="font-semibold text-navy-700 hover:underline">
+                {site.phones.mobile.display}
+              </a>
+              , or send a WhatsApp message to {site.phones.main.display}. WhatsApp works from any country with an
+              internet connection.
+            </p>
+
+            <h3 className="mt-8 text-lg font-semibold text-neutral-950">Our OPD hours in your time</h3>
+            <div className="mt-4 overflow-x-auto rounded-2xl border border-neutral-200">
+              <table className="w-full min-w-[420px] text-left text-sm">
+                <thead className="bg-navy-50 text-navy-900">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 font-semibold">Where you are</th>
+                    <th scope="col" className="px-4 py-3 font-semibold">OPD hours, local time</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral-100 text-neutral-700">
+                  {opdInGulfTime.map((row) => (
+                    <tr key={row.place}>
+                      <th scope="row" className="px-4 py-3 font-semibold text-neutral-950">{row.place}</th>
+                      <td className="whitespace-nowrap px-4 py-3">{row.hours}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-sm text-neutral-500">
+              The emergency line, {site.phones.emergency.display}, is answered 24 hours a day.
+            </p>
+
+            <h2 className="mt-14 text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
+              Arranging care for your family in Kadapa
+            </h2>
+            <div className="mt-6 grid gap-5 sm:grid-cols-3">
+              {familyCare.map((item) => (
+                <div key={item.title} className="info-card flex flex-col">
+                  <h3 className="text-base font-semibold text-neutral-950">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-600">{item.text}</p>
+                  <Link href={item.link.href} className="text-link mt-auto pt-4">
+                    {item.link.label}
+                    <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            <h2 className="mt-14 text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
+              Having your baby in Kadapa: how it works
+            </h2>
             <ol className="mt-8 space-y-7">
               {nriSteps.map((step, index) => (
                 <li key={step.title} className="flex gap-4">
@@ -86,7 +184,7 @@ export default function NriPage({ guides }) {
 
         <div className="mt-20 border-t border-neutral-100 pt-16">
           <h2 className="text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
-            Services for families travelling from abroad
+            Services for families travelling to deliver
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
             We arrange these on request. Where a service has a charge, it is confirmed in writing before you book.
@@ -182,6 +280,20 @@ export default function NriPage({ guides }) {
         )}
 
         <div className="mt-20 border-t border-neutral-100 pt-16">
+          <h2 className="text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
+            Questions from families abroad
+          </h2>
+          <div className="mt-6 max-w-3xl border-t border-neutral-200">
+            {faqs.map((faq) => (
+              <div key={faq.question} className="border-b border-neutral-200 py-5">
+                <h3 className="text-base font-semibold text-neutral-950">{faq.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600 sm:text-base">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-20 border-t border-neutral-100 pt-16">
           <h2 className="text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">Read before you plan</h2>
           <ul className="mt-8 grid gap-5 md:grid-cols-3">
             {guides.map((guide) => (
@@ -200,7 +312,7 @@ export default function NriPage({ guides }) {
                   href={guidePath(guide.slug, 'te')}
                   hrefLang="te-IN"
                   lang="te"
-                  className="mt-2 inline-block text-sm font-medium text-navy-700 hover:underline"
+                  className="mt-1 inline-block py-1.5 text-sm font-medium text-navy-700 hover:underline"
                 >
                   తెలుగులో చదవండి
                 </Link>

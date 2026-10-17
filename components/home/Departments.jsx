@@ -10,7 +10,14 @@ const departments = [
     href: '/services/pregnancy',
     description:
       "Complete care for every stage of a woman's health journey. From antenatal care, safe deliveries and high-risk pregnancies to laparoscopic gynaecology and cancer screening.",
-    tags: ['Pregnancy Care', 'Normal Delivery', 'High-Risk Pregnancy', 'Gynaecology', 'Laparoscopy', 'Cancer Screening'],
+    tags: [
+      { label: 'Pregnancy Care', href: '/services/pregnancy' },
+      { label: 'Normal Delivery', href: '/services/pregnancy' },
+      { label: 'High-Risk Pregnancy', href: '/services/pregnancy' },
+      { label: 'Gynaecology', href: '/services/gynaecology' },
+      { label: 'Laparoscopy', href: '/services/gynaecology' },
+      { label: 'Cancer Screening', href: '/services/cancer' },
+    ],
   },
   {
     label: 'Fertility & IVF',
@@ -18,15 +25,29 @@ const departments = [
     href: '/services/fertility',
     description:
       'Advanced reproductive medicine for couples hoping to start a family, with a modular embryology lab, ICSI facilities and personalised treatment plans.',
-    tags: ['IUI', 'IVF', 'ICSI', 'Male Infertility', 'Semen Analysis', 'Ovulation Study'],
+    tags: [
+      { label: 'IUI', href: '/services/fertility' },
+      { label: 'IVF', href: '/services/fertility' },
+      { label: 'ICSI', href: '/services/fertility' },
+      { label: 'Male Infertility', href: '/services/fertility' },
+      { label: 'Semen Analysis', href: '/services/diagnostics' },
+      { label: 'Ovulation Study', href: '/services/fertility' },
+    ],
   },
   {
     label: 'Child & Neonatal Care',
     image: '/images/dept-paediatric.jpg',
-    href: '/services/neonatal',
+    href: '/services/paediatrics',
     description:
       'A 24-hour Level III NICU for premature and critically ill newborns, and dedicated paediatric care as your child grows, from vaccinations to emergencies.',
-    tags: ['Level III NICU', 'Preterm Care', 'HFNC & CPAP', 'Vaccination', 'Growth Monitoring', 'Jaundice Care'],
+    tags: [
+      { label: 'Child Specialist', href: '/services/paediatrics' },
+      { label: 'Vaccination', href: '/services/paediatrics' },
+      { label: 'Growth Monitoring', href: '/services/paediatrics' },
+      { label: 'Level III NICU', href: '/services/neonatal' },
+      { label: 'Preterm Care', href: '/services/neonatal' },
+      { label: 'Jaundice Care', href: '/services/neonatal' },
+    ],
   },
 ];
 
@@ -92,12 +113,13 @@ export default function Departments() {
         <div className="hidden w-px bg-neutral-200 lg:block" />
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {current.tags.map((tag) => (
-            <span
-              key={tag}
-              className="flex items-center justify-center rounded-full border border-navy-200 px-4 py-2.5 text-center text-sm font-medium text-navy-800"
+            <Link
+              key={tag.label}
+              href={tag.href}
+              className="flex items-center justify-center rounded-full border border-navy-200 px-4 py-2.5 text-center text-sm font-medium text-navy-800 transition-colors hover:border-navy-400 hover:bg-navy-50"
             >
-              {tag}
-            </span>
+              {tag.label}
+            </Link>
           ))}
         </div>
       </div>

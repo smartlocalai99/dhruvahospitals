@@ -106,13 +106,13 @@ export default function GuideArticle({ guide, content, lang, otherGuides }) {
 
   return (
     <Layout
-      title={content.title}
+      title={content.seoTitle || content.title}
       description={content.description}
       ogLocale={guideLanguages[lang].ogLocale}
       alternates={['en', 'te'].map((code) => ({ hrefLang: guideLanguages[code].hrefLang, path: guidePath(slug, code) }))}
       jsonLd={schemas}
     >
-      <div lang={lang}>
+      <div lang={lang} className={lang === 'te' ? 'telugu-page' : undefined}>
         <PageHeader eyebrow={ui.eyebrow} title={content.title} />
 
         <section className="container-page py-16 sm:py-20">
@@ -138,14 +138,14 @@ export default function GuideArticle({ guide, content, lang, otherGuides }) {
                 <p className="mt-3 text-base leading-relaxed text-neutral-900 sm:text-lg">{content.answer}</p>
                 <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-3 border-t border-navy-100 pt-5 text-sm">
                   <div>
-                    <dt className="text-neutral-500">{ui.updated}</dt>
+                    <dt className="text-neutral-600">{ui.updated}</dt>
                     <dd className="mt-0.5 font-semibold text-neutral-950">
                       <time dateTime={guide.updatedOn}>{formatDate(guide.updatedOn, lang)}</time>
                     </dd>
                   </div>
                   {reviewed && (
                     <div>
-                      <dt className="text-neutral-500">{ui.reviewer}</dt>
+                      <dt className="text-neutral-600">{ui.reviewer}</dt>
                       <dd className="mt-0.5 font-semibold text-neutral-950">
                         <Link href={`/doctors/${reviewer.slug}`} className="text-navy-700 hover:underline">
                           {reviewer.name}
@@ -181,6 +181,18 @@ export default function GuideArticle({ guide, content, lang, otherGuides }) {
                   {section.steps && <Steps steps={section.steps} lang={lang} />}
                   {section.list && <CheckList items={section.list} />}
                   {section.table && <Table {...section.table} />}
+                  {section.links && (
+                    <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+                      {section.links.map((link) => (
+                        <li key={link.href}>
+                          <Link href={link.href} className="text-link">
+                            {link.label}
+                            <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ))}
 

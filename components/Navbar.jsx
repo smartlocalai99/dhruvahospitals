@@ -2,7 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { LuChevronDown } from 'react-icons/lu';
 import BookCallButton from './BookCallButton';
+import ServicesMenu from './ServicesMenu';
+import { getServiceIcon } from './serviceIcons';
+import { services } from '@/lib/data';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -22,6 +26,7 @@ function isActive(pathname, href) {
 export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const isHome = router.pathname === '/';
   const [overHero, setOverHero] = useState(isHome);
 
@@ -73,18 +78,20 @@ export default function Navbar() {
         <nav className="hidden items-center gap-9 lg:flex" aria-label="Primary">
           {navLinks.map((link) => {
             const active = isActive(router.pathname, link.href);
+            const textClass = active
+              ? glass
+                ? 'text-navy-700'
+                : 'text-neutral-400'
+              : 'text-neutral-800 hover:text-navy-700';
+            if (link.href === '/services') {
+              return <ServicesMenu key={link.href} active={active} textClass={textClass} />;
+            }
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
-                className={`text-[15px] font-medium transition-colors ${
-                  active
-                    ? glass
-                      ? 'text-navy-700'
-                      : 'text-neutral-400'
-                    : 'text-neutral-800 hover:text-navy-700'
-                }`}
+                className={`text-[15px] font-medium transition-colors ${textClass}`}
               >
                 {link.label}
               </Link>
@@ -127,13 +134,61 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="border-t border-neutral-100 bg-white/95 lg:hidden">
+        <div id="mobile-menu" className="max-h-[calc(100svh-5rem)] overflow-y-auto border-t border-neutral-100 bg-white/95 lg:hidden">
           <nav
             className="container-page flex flex-col gap-1 py-4"
             aria-label="Primary mobile"
           >
             {navLinks.map((link) => {
               const active = isActive(router.pathname, link.href);
+              if (link.href === '/services') {
+                return (
+                  <div key={link.href}>
+                    <div className={`flex items-center rounded-lg ${active ? 'bg-navy-50' : ''}`}>
+                      <Link
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        aria-current={router.pathname === '/services' ? 'page' : undefined}
+                        className={`flex-1 px-3 py-2.5 text-[15px] font-medium ${active ? 'text-navy-700' : 'text-neutral-800'}`}
+                      >
+                        {link.label}
+                      </Link>
+                      <button
+                        type="button"
+                        aria-expanded={mobileServicesOpen}
+                        aria-controls="mobile-services"
+                        aria-label={mobileServicesOpen ? 'Hide services' : 'Show services'}
+                        onClick={() => setMobileServicesOpen((value) => !value)}
+                        className="flex h-11 w-11 items-center justify-center text-neutral-600"
+                      >
+                        <LuChevronDown
+                          className={`h-5 w-5 transition-transform duration-200 ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </div>
+                    {mobileServicesOpen && (
+                      <ul id="mobile-services" className="mb-1 ml-3 grid gap-0.5 border-l border-neutral-200 pl-3 sm:grid-cols-2">
+                        {services.map((service) => {
+                          const Icon = getServiceIcon(service.slug);
+                          return (
+                            <li key={service.slug}>
+                              <Link
+                                href={`/services/${service.slug}`}
+                                onClick={() => setOpen(false)}
+                                className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-neutral-700 hover:bg-navy-50 hover:text-navy-700"
+                              >
+                                {Icon && <Icon className="h-4 w-4 flex-none text-navy-700" aria-hidden="true" />}
+                                {service.title}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                );
+              }
               return (
                 <Link
                   key={link.href}

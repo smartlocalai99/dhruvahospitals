@@ -5,12 +5,17 @@ import Gallery from '@/components/Gallery';
 import SectionHeading from '@/components/SectionHeading';
 import EmergencyBanner from '@/components/EmergencyBanner';
 import { facilities, gallery } from '@/lib/data';
+import { breadcrumbSchema } from '@/lib/schema';
 
 export default function FacilitiesPage() {
   return (
     <Layout
-      title="Facilities"
+      title="Hospital Facilities in Kadapa: NICU, ICU & IVF Lab"
       description="ICU, Level III NICU, modular operation theatres, IVF lab, diagnostics, pharmacy and 24/7 emergency care at Dhruva Hospitals, Kadapa."
+      jsonLd={breadcrumbSchema([
+        { name: 'Home', path: '/' },
+        { name: 'Facilities', path: '/facilities' },
+      ])}
       image="/images/operation-theatre.jpg"
       imageAlt="Modular operation theatre at Dhruva Hospitals"
     >

@@ -19,14 +19,23 @@ const staticPaths = [
 ];
 
 function buildSitemap() {
-  const paths = [
-    ...staticPaths,
-    ...services.map((service) => `/services/${service.slug}`),
-    ...doctors.filter(hasProfile).map((doctor) => `/doctors/${doctor.slug}`),
-    ...publishedGuides.flatMap((guide) => [guidePath(guide.slug, 'en'), guidePath(guide.slug, 'te')]),
+  // lastmod only where the date is real (guides record when they were last updated).
+  const entries = [
+    ...staticPaths.map((path) => ({ path })),
+    ...services.map((service) => ({ path: `/services/${service.slug}` })),
+    ...doctors.filter(hasProfile).map((doctor) => ({ path: `/doctors/${doctor.slug}` })),
+    ...publishedGuides.flatMap((guide) =>
+      ['en', 'te'].map((lang) => ({ path: guidePath(guide.slug, lang), lastmod: guide.updatedOn }))
+    ),
   ];
 
-  const urls = paths.map((path) => `  <url>\n    <loc>${absoluteUrl(path)}</loc>\n  </url>`).join('\n');
+  const urls = entries
+    .map(({ path, lastmod }) =>
+      [`  <url>`, `    <loc>${absoluteUrl(path)}</loc>`, lastmod && `    <lastmod>${lastmod}</lastmod>`, `  </url>`]
+        .filter(Boolean)
+        .join('\n')
+    )
+    .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }

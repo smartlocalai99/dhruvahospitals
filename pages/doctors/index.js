@@ -4,6 +4,7 @@ import DoctorCard from '@/components/DoctorCard';
 import BookCallButton from '@/components/BookCallButton';
 import { CheckIcon } from '@/components/Icons';
 import { doctors } from '@/lib/data';
+import { breadcrumbSchema } from '@/lib/schema';
 
 const standards = [
   {
@@ -23,8 +24,12 @@ const standards = [
 export default function DoctorsPage() {
   return (
     <Layout
-      title="Doctors"
+      title="Doctors in Kadapa: Gynaecologist, Paediatrician & Specialists"
       description="Meet the specialists at Dhruva Hospitals, Kadapa: IVF and gynaecology, neonatology and paediatrics, general medicine, surgery and more."
+      jsonLd={breadcrumbSchema([
+        { name: 'Home', path: '/' },
+        { name: 'Doctors', path: '/doctors' },
+      ])}
     >
       <PageHeader
         eyebrow="Doctors"

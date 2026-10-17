@@ -5,7 +5,10 @@ import CountUp from '@/components/CountUp';
 import SectionHeading from '@/components/SectionHeading';
 import { CheckIcon, DiamondIcon } from '@/components/Icons';
 import { stats } from '@/lib/data';
-import { hospitalSchema } from '@/lib/schema';
+import Link from 'next/link';
+import KeyFacts from '@/components/KeyFacts';
+import { site, googleMapsUrl } from '@/lib/site';
+import { breadcrumbSchema, hospitalSchema } from '@/lib/schema';
 
 const strengths = [
   {
@@ -57,9 +60,15 @@ const infrastructure = [
 export default function AboutPage() {
   return (
     <Layout
-      title="About Us"
-      description="Dhruva Hospitals brings trusted medical expertise, modern healthcare standards, and compassionate care closer to the families of Kadapa and Rayalaseema."
-      jsonLd={hospitalSchema()}
+      title="About Dhruva Hospitals, Kadapa"
+      description="Dhruva Hospitals is a hospital in Kadapa, Andhra Pradesh, for pregnancy, gynaecology, IVF, paediatrics and newborn intensive care, with 24/7 emergency services."
+      jsonLd={[
+        hospitalSchema(),
+        breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'About', path: '/about' },
+        ]),
+      ]}
     >
       <PageHeader
         eyebrow="About Us"
@@ -89,6 +98,58 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+
+        <KeyFacts
+          title="Dhruva Hospitals at a glance"
+          className="mt-14"
+          rows={[
+            {
+              label: 'Where',
+              value: (
+                <>
+                  {site.address.full}.{' '}
+                  <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="text-navy-700 hover:underline">
+                    Get directions
+                  </a>
+                </>
+              ),
+            },
+            {
+              label: 'Main specialties',
+              value: (
+                <>
+                  <Link href="/services/pregnancy" className="text-navy-700 hover:underline">Pregnancy & delivery</Link>,{' '}
+                  <Link href="/services/gynaecology" className="text-navy-700 hover:underline">gynaecology</Link>,{' '}
+                  <Link href="/services/fertility" className="text-navy-700 hover:underline">fertility & IVF</Link>,{' '}
+                  <Link href="/services/paediatrics" className="text-navy-700 hover:underline">paediatrics</Link> and a{' '}
+                  <Link href="/services/neonatal" className="text-navy-700 hover:underline">Level III NICU</Link>
+                </>
+              ),
+            },
+            {
+              label: 'Chairman',
+              value: (
+                <Link href="/doctors/dr-sudarshan-reddy" className="text-navy-700 hover:underline">
+                  Dr. Sudarshan Reddy K, Senior Consultant – Paediatrics & Neonatology
+                </Link>
+              ),
+            },
+            { label: 'Hours', value: `OPD ${site.hours.opd}; emergency, ICU and NICU 24/7` },
+            {
+              label: 'Appointments',
+              value: (
+                <>
+                  <a href={site.phones.main.href} className="text-navy-700 hover:underline">{site.phones.main.display}</a> or{' '}
+                  <a href={site.phones.mobile.href} className="text-navy-700 hover:underline">{site.phones.mobile.display}</a>
+                </>
+              ),
+            },
+            {
+              label: 'Emergency',
+              value: <a href={site.phones.emergency.href} className="text-navy-700 hover:underline">{site.phones.emergency.display}</a>,
+            },
+          ]}
+        />
 
         <div className="mt-14 grid grid-cols-2 gap-8 border-y border-neutral-100 py-10 sm:grid-cols-4">
           {stats.map((stat) => (

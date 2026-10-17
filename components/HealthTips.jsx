@@ -1,11 +1,12 @@
 import { FaYoutube } from 'react-icons/fa';
 import YouTubeShort from './YouTubeShort';
-import { videos } from '@/lib/data';
+import { videos as savedVideos } from '@/lib/data';
 import { site } from '@/lib/site';
 
-// Doctors' YouTube Shorts: used on the home page and on Dhruva Speaks.
+// Doctors' YouTube videos: used on the home page and on Dhruva Speaks.
+// `videos` comes from the live channel feed (lib/youtube.js); the saved list is a fallback.
 // Phones get a swipeable row; larger screens get a grid.
-export default function HealthTips({ className = '' }) {
+export default function HealthTips({ className = '', videos = savedVideos }) {
   return (
     <section className={`container-page ${className}`}>
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -35,7 +36,7 @@ export default function HealthTips({ className = '' }) {
       <div className="-mx-6 mt-10 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-5 [&::-webkit-scrollbar]:hidden">
         {videos.map((video) => (
           <div key={video.id} className="w-[62%] flex-none snap-start sm:w-auto">
-            <YouTubeShort id={video.id} title={video.title} />
+            <YouTubeShort id={video.id} title={video.title} short={video.short !== false} />
           </div>
         ))}
       </div>

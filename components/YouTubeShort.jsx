@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { PlayIcon } from './Icons';
 
 // Shows a thumbnail and only loads the YouTube player when the visitor presses play.
-export default function YouTubeShort({ id, title }) {
+// Shorts use YouTube's portrait thumbnail; regular videos use the standard one, cropped to fit.
+export default function YouTubeShort({ id, title, short = true }) {
   const [playing, setPlaying] = useState(false);
 
   return (
@@ -23,13 +24,35 @@ export default function YouTubeShort({ id, title }) {
           className="group absolute inset-0 h-full w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700"
           aria-label={`Play video: ${title}`}
         >
-          <Image
-            src={`https://i.ytimg.com/vi/${id}/oar2.jpg`}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          />
+          {short ? (
+            <Image
+              src={`https://i.ytimg.com/vi/${id}/oar2.jpg`}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            // A landscape video in a portrait card: the 16:9 frame in the middle, on a blurred copy of itself.
+            <>
+              <Image
+                src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                className="scale-125 object-cover opacity-70 blur-xl"
+              />
+              <span className="absolute inset-x-0 top-1/2 aspect-video -translate-y-1/2 overflow-hidden">
+                <Image
+                  src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </span>
+            </>
+          )}
           <span className="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/10 to-transparent" />
           <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-navy-700 shadow-lg transition-transform group-hover:scale-105">
             <PlayIcon className="ml-0.5 h-6 w-6" aria-hidden="true" />

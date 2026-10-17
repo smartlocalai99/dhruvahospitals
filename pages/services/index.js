@@ -9,7 +9,7 @@ import { breadcrumbSchema } from '@/lib/schema';
 export default function ServicesPage() {
   return (
     <Layout
-      title="Services"
+      title="Medical Services in Kadapa"
       description="Fertility & IVF, pregnancy care, gynaecology, cancer screening, neonatal & paediatric care, diagnostics, surgery and critical care at Dhruva Hospitals, Kadapa."
       jsonLd={breadcrumbSchema([
         { name: 'Home', path: '/' },
@@ -24,7 +24,7 @@ export default function ServicesPage() {
 
       <section className="container-page py-16 sm:py-20">
         <h2 className="sr-only">Our services</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <ServiceCard key={service.slug} service={service} />
           ))}

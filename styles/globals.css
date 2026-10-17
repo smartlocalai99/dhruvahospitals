@@ -10,8 +10,10 @@ body {
   @apply font-sans text-neutral-900 antialiased;
 }
 
-/* Telugu text: Latin characters (numbers, NICU, WhatsApp) stay in Plus Jakarta Sans. */
-[lang='te'] {
+/* Telugu pages (guides): Latin characters (numbers, NICU, WhatsApp) stay in Plus Jakarta Sans.
+   Applied by class rather than [lang='te'] so a single Telugu link on an English page doesn't
+   download the Telugu font; those use the device's own Telugu font. */
+.telugu-page {
   font-family: var(--font-jakarta), var(--font-telugu), sans-serif;
   line-height: 1.7;
 }

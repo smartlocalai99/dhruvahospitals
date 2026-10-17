@@ -19,7 +19,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <div key={service.slug} className="flex items-start gap-5">
               <CoverImage
