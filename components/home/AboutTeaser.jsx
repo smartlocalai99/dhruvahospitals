@@ -42,8 +42,8 @@ export default function AboutTeaser() {
         </div>
 
         <CoverImage
-          src="/images/about-team.jpg"
-          alt="Doctors at Dhruva Hospitals"
+          src="/images/doctors-in-consultation-room.jpg"
+          alt="Dr. S Mounika Reddy and Dr. Sudarshan Reddy K in a consultation room"
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-[6/5] w-full rounded-3xl"
         />

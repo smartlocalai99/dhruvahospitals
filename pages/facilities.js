@@ -16,7 +16,7 @@ export default function FacilitiesPage() {
         { name: 'Home', path: '/' },
         { name: 'Facilities', path: '/facilities' },
       ])}
-      image="/images/operation-theatre.jpg"
+      image="/images/modular-operation-theatre.jpg"
       imageAlt="Modular operation theatre at Dhruva Hospitals"
     >
       <PageHeader

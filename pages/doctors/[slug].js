@@ -65,14 +65,26 @@ export default function DoctorProfilePage({ slug, reviewedGuides }) {
         </Link>
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[380px_1fr] lg:gap-14">
-          <div className="relative">
+          <div className="relative space-y-5">
             <CoverImage
               src={doctor.image}
-              alt={doctor.name}
+              alt={`${doctor.name}, ${doctor.title} at Dhruva Hospitals, Kadapa`}
               priority
               sizes="(min-width: 1024px) 380px, 100vw"
               className="aspect-[4/5] w-full rounded-3xl"
             />
+            {doctor.photoAtHospital && (
+              <figure>
+                <CoverImage
+                  src={doctor.photoAtHospital}
+                  alt={`${doctor.name} at the reception of Dhruva Hospitals, Kadapa`}
+                  sizes="(min-width: 1024px) 380px, 100vw"
+                  className="aspect-square w-full rounded-3xl"
+                  imageClassName="object-cover object-[70%_center]"
+                />
+                <figcaption className="mt-2 text-sm text-neutral-600">{doctor.name} at Dhruva Hospitals, Kadapa</figcaption>
+              </figure>
+            )}
           </div>
 
           <div>

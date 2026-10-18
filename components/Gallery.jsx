@@ -13,7 +13,7 @@ export default function Gallery({ images }) {
             imageClassName="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
           <figcaption aria-hidden="true" className="absolute bottom-3 left-3 rounded-xl bg-white/90 px-3.5 py-1.5 text-sm font-medium text-navy-800 shadow-sm backdrop-blur">
-            {image.alt}
+            {image.caption || image.alt}
           </figcaption>
         </figure>
       ))}

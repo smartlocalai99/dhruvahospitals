@@ -16,6 +16,7 @@ export default function DoctorCard({ doctor, priority = false }) {
     >
       <CoverImage
         src={doctor.image}
+        alt={doctor.photoPlaceholder ? '' : `${doctor.name}, ${doctor.title}`}
         priority={priority}
         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
         className="aspect-[4/5] w-full"

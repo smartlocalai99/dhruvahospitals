@@ -48,6 +48,7 @@ Titles and descriptions live with the content. Services: `heading`, `seoTitle` a
   - **BreadcrumbList** and **FAQPage**.
   - No ratings, reviews, prices or coordinates are marked up; none are verified. FAQ markup doesn't guarantee a rich result.
 - **One entity everywhere.** "Dhruva Hospitals", the same address, phone numbers and doctor names, on every page and in the structured data.
+- **Images.** Every content photo has a descriptive file name (old names redirect) and alt text that says what's in it; doctors are named only in their own portraits. Pages list their photos in the sitemap for Google Images, and the hospital and doctor structured data include the building, team and on-site doctor photos. Images are served as AVIF or WebP at the size each screen needs.
 - **Evidence of expertise.** Doctors' qualifications and training are on their profiles and specialty pages. Each specialty page shows the doctors' own YouTube videos on the topic. The paediatric guide cites the WHO's danger signs for sick children.
 - **No `llms.txt`.** Google doesn't use it, no major AI search engine has committed to it, and everything it would contain is already crawlable on the pages and in the sitemap. `robots.txt` allows all crawlers, including AI crawlers.
 

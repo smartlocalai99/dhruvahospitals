@@ -25,6 +25,8 @@ const nextConfig = {
     SITE_URL: siteUrl,
   },
   images: {
+    // AVIF first (smaller files) for browsers that support it, WebP otherwise.
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [{ protocol: 'https', hostname: 'i.ytimg.com' }],
   },
   async headers() {
@@ -46,6 +48,24 @@ const nextConfig = {
       { source: '/terms-of-service', destination: '/terms', permanent: true },
       // Appointments are booked by phone; send old booking links to the contact numbers.
       { source: '/book-appointment', destination: '/contact', permanent: true },
+      // Photos renamed to descriptive file names (October 2026); keep the old addresses working.
+      { source: '/images/about-doctors.jpg', destination: '/images/dr-mounika-reddy-and-dr-sudarshan-reddy.jpg', permanent: true },
+      { source: '/images/about-team.jpg', destination: '/images/doctors-in-consultation-room.jpg', permanent: true },
+      { source: '/images/dept-child-care.jpg', destination: '/images/dr-mounika-reddy-holding-baby.jpg', permanent: true },
+      { source: '/images/dept-paediatric.jpg', destination: '/images/paediatrician-checking-baby.jpg', permanent: true },
+      { source: '/images/dept-womens-care.jpg', destination: '/images/pregnant-woman-resting.jpg', permanent: true },
+      { source: '/images/hospital-exterior.jpg', destination: '/images/dhruva-hospitals-kadapa-building.jpg', permanent: true },
+      { source: '/images/operation-theatre.jpg', destination: '/images/modular-operation-theatre.jpg', permanent: true },
+      { source: '/images/service-diagnostics.jpg', destination: '/images/doctor-explaining-x-ray.jpg', permanent: true },
+      { source: '/images/service-gynaecology.jpg', destination: '/images/gynaecologist-consultation-desk.jpg', permanent: true },
+      { source: '/images/service-maternity.jpg', destination: '/images/pregnancy-consultation.jpg', permanent: true },
+      { source: '/images/service-pediatric.jpg', destination: '/images/paediatrician-examining-baby.jpg', permanent: true },
+      { source: '/images/service-xray.jpg', destination: '/images/chest-x-ray-diagnostics.jpg', permanent: true },
+      { source: '/images/gallery/consultation-cabin.jpg', destination: '/images/gallery/dr-sudarshan-reddy-consultation-room-door.jpg', permanent: true },
+      { source: '/images/gallery/corridor.jpg', destination: '/images/gallery/hospital-corridor.jpg', permanent: true },
+      { source: '/images/gallery/hospital-entrance.jpg', destination: '/images/gallery/dhruva-hospitals-entrance.jpg', permanent: true },
+      { source: '/images/gallery/reception.jpg', destination: '/images/gallery/dhruva-hospitals-reception.jpg', permanent: true },
+      { source: '/images/hero-care.jpg', destination: '/images/dr-mounika-reddy-and-dr-sudarshan-reddy.jpg', permanent: true },
     ];
   },
 };

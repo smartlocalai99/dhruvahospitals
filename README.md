@@ -37,7 +37,9 @@ Appointments are booked by phone: every "Book now" / "Book an appointment" butto
 All photos live in `public/images/`. To update one, replace the file and keep the same name.
 
 - Doctor photos: `public/images/doctors/<doctor-slug>.jpg` (portrait, ideally at least 800 × 1000 px). Dr. Vasanta Kumari and Dr. B Someshwar Reddy currently use placeholder silhouettes.
-- Hospital photos: `public/images/gallery/`.
+- Hospital photos: `public/images/gallery/`, listed with a short `caption` and a descriptive `alt` in `lib/data.js`.
+- Doctors photographed at the hospital: `photoAtHospital` in `lib/data.js` (shown under the portrait on their profile).
+- Name new files in plain, descriptive words (for example `dhruva-hospitals-kadapa-team.jpg`) and resize large camera photos to about 2400 px before adding them; originals can go in `media-source/` (not committed). Renamed photos keep their old address through redirects in `next.config.js`.
 - Social preview image: `public/og-image.jpg` (1200 × 630 px).
 
 ### Hero video

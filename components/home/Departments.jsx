@@ -6,7 +6,7 @@ import { ArrowRightIcon } from '../Icons';
 const departments = [
   {
     label: "Women's Care",
-    image: '/images/dept-womens-care.jpg',
+    image: '/images/pregnant-woman-resting.jpg',
     href: '/services/pregnancy',
     description:
       "Complete care for every stage of a woman's health journey. From antenatal care, safe deliveries and high-risk pregnancies to laparoscopic gynaecology and cancer screening.",
@@ -21,7 +21,7 @@ const departments = [
   },
   {
     label: 'Fertility & IVF',
-    image: '/images/dept-child-care.jpg',
+    image: '/images/dr-mounika-reddy-holding-baby.jpg',
     href: '/services/fertility',
     description:
       'Advanced reproductive medicine for couples hoping to start a family, with a modular embryology lab, ICSI facilities and personalised treatment plans.',
@@ -36,7 +36,7 @@ const departments = [
   },
   {
     label: 'Child & Neonatal Care',
-    image: '/images/dept-paediatric.jpg',
+    image: '/images/paediatrician-checking-baby.jpg',
     href: '/services/paediatrics',
     description:
       'A 24-hour Level III NICU for premature and critically ill newborns, and dedicated paediatric care as your child grows, from vaccinations to emergencies.',

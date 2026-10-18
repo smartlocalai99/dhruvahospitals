@@ -4,9 +4,9 @@ import { gallery } from '@/lib/data';
 
 // The exterior first (shown large), then a mix of rooms.
 const tour = [
-  '/images/hospital-exterior.jpg',
-  '/images/gallery/reception.jpg',
-  '/images/operation-theatre.jpg',
+  '/images/dhruva-hospitals-kadapa-building.jpg',
+  '/images/gallery/dhruva-hospitals-reception.jpg',
+  '/images/modular-operation-theatre.jpg',
   '/images/gallery/paediatric-ward.jpg',
   '/images/gallery/consultation-room.jpg',
 ];
@@ -47,7 +47,7 @@ export default function TourGallery() {
                 imageClassName="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
               <figcaption aria-hidden="true" className="absolute bottom-3 left-3 rounded-xl bg-white/90 px-3.5 py-1.5 text-sm font-medium text-navy-800 shadow-sm backdrop-blur">
-                {photo.alt}
+                {photo.caption || photo.alt}
               </figcaption>
             </figure>
           </li>

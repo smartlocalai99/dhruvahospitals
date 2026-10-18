@@ -79,8 +79,8 @@ export default function AboutPage() {
       <section className="container-page py-16 sm:py-20">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
           <CoverImage
-            src="/images/about-doctors.jpg"
-            alt="Doctors at Dhruva Hospitals"
+            src="/images/dr-mounika-reddy-and-dr-sudarshan-reddy.jpg"
+            alt="Dr. S Mounika Reddy and Dr. Sudarshan Reddy K at Dhruva Hospitals, Kadapa"
             priority
             sizes="(min-width: 1024px) 55vw, 100vw"
             className="aspect-[6/5] w-full rounded-3xl lg:aspect-auto lg:min-h-[32rem]"
@@ -178,10 +178,10 @@ export default function AboutPage() {
             </figure>
           </div>
           <CoverImage
-            src="/images/gallery/hospital-entrance.jpg"
-            alt="Entrance of Dhruva Hospitals, Kadapa"
+            src="/images/dhruva-hospitals-kadapa-team.jpg"
+            alt="Doctors and staff of Dhruva Hospitals at the hospital reception in Kadapa"
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="aspect-[5/4] w-full rounded-3xl"
+            className="aspect-[16/10] w-full rounded-3xl"
           />
         </div>
       </section>
@@ -206,8 +206,8 @@ export default function AboutPage() {
 
         <div className="mt-20 grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
           <CoverImage
-            src="/images/operation-theatre.jpg"
-            alt="Modular operation theatre at Dhruva Hospitals"
+            src="/images/modular-operation-theatre.jpg"
+            alt="Modular operation theatre at Dhruva Hospitals, Kadapa"
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="aspect-[5/4] w-full rounded-3xl"
           />

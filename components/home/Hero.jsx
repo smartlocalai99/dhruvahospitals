@@ -84,8 +84,8 @@ export default function Hero() {
         </div>
 
         <CoverImage
-          src="/images/hero-care.jpg"
-          alt="Doctors at Dhruva Hospitals, Kadapa"
+          src="/images/dr-mounika-reddy-and-dr-sudarshan-reddy.jpg"
+          alt="Dr. S Mounika Reddy and Dr. Sudarshan Reddy K at Dhruva Hospitals, Kadapa"
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-[4/3] w-full rounded-3xl"
         />
