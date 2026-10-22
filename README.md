@@ -28,7 +28,10 @@ Appointments are booked by phone: every "Book now" / "Book an appointment" butto
 | What | Where |
 |---|---|
 | Phone numbers, email, address, timings, social links | `lib/site.js` |
+| Registration certificate details, opening date, Google Maps pin and listing ID | `lib/site.js` |
 | Services, doctors, facilities, FAQs, testimonials, gallery, videos | `lib/data.js` |
+| Service page FAQs, videos and sources | `lib/service-details.js` |
+| Telugu service pages (`/te/services/…`) | `lib/services-te.js` (text), `lib/service-languages.js` (labels) |
 | Home page departments | `components/home/Departments.jsx` |
 | Privacy policy and terms | `pages/privacy.js`, `pages/terms.js` |
 
@@ -79,4 +82,6 @@ The token lasts 60 days, so repeat steps 3 and 4 before then (a calendar reminde
 - Old URLs (`/neonatal`, `/neonatal-care`, `/privacy-policy`, `/book-appointment`) redirect to their new pages (`next.config.js`).
 - `dhruvahospitals.vercel.app` permanently redirects to the same path on `https://www.dhruvahospitals.com` (`next.config.js`); preview deployments keep their own addresses. The bare `dhruvahospitals.com` redirects to `www` in Vercel → Project → Settings → Domains.
 - Specialty pages take their H1, title tag, meta description, FAQs and videos from `lib/data.js` and `lib/service-details.js`.
+- Pregnancy, gynaecology, fertility, paediatrics and NICU also have Telugu pages (`/te/services/…`), linked to the English ones with hreflang. Keep both languages saying the same thing.
+- Server functions run in Mumbai (`vercel.json`), close to most visitors.
 - The SEO plan, Google Business Profile checklist and monitoring checklist are in [`docs/SEO.md`](docs/SEO.md).

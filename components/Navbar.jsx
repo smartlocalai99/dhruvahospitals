@@ -78,10 +78,11 @@ export default function Navbar() {
         <nav className="hidden items-center gap-9 lg:flex" aria-label="Primary">
           {navLinks.map((link) => {
             const active = isActive(router.pathname, link.href);
+            // The current page is marked in brand navy with an underline (light grey failed contrast).
             const textClass = active
               ? glass
                 ? 'text-navy-700'
-                : 'text-neutral-400'
+                : 'text-navy-700 underline decoration-2 underline-offset-8'
               : 'text-neutral-800 hover:text-navy-700';
             if (link.href === '/services') {
               return <ServicesMenu key={link.href} active={active} textClass={textClass} />;

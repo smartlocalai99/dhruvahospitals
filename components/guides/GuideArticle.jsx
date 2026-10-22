@@ -4,6 +4,7 @@ import PageHeader from '@/components/PageHeader';
 import NriHelpCard from '@/components/guides/NriHelpCard';
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from '@/components/Icons';
 import { getDoctor } from '@/lib/data';
+import { site } from '@/lib/site';
 import { formatDate, guideLanguages, guidePath } from '@/lib/guide-languages';
 import { breadcrumbSchema, faqSchema, medicalWebPageSchema, physicianSchema } from '@/lib/schema';
 
@@ -143,6 +144,10 @@ export default function GuideArticle({ guide, content, lang, otherGuides }) {
                       <time dateTime={guide.updatedOn}>{formatDate(guide.updatedOn, lang)}</time>
                     </dd>
                   </div>
+                  <div>
+                    <dt className="text-neutral-600">{ui.publishedBy}</dt>
+                    <dd className="mt-0.5 font-semibold text-neutral-950">{ui.publisher}</dd>
+                  </div>
                   {reviewed && (
                     <div>
                       <dt className="text-neutral-600">{ui.reviewer}</dt>
@@ -229,6 +234,8 @@ export default function GuideArticle({ guide, content, lang, otherGuides }) {
                   </ul>
                 </div>
               )}
+
+              <p className="mt-12 text-sm text-neutral-500">{ui.disclaimer(site.phones.emergency.display)}</p>
             </article>
 
             <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">

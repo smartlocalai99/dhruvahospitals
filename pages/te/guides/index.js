@@ -1,8 +1,9 @@
 import GuideIndex from '@/components/guides/GuideIndex';
 import { publishedGuides } from '@/lib/guides';
+import { servicesTe, teServicePath, teServiceSlugs } from '@/lib/services-te';
 
-export default function TeluguGuidesPage({ items }) {
-  return <GuideIndex lang="te" items={items} />;
+export default function TeluguGuidesPage({ items, services }) {
+  return <GuideIndex lang="te" items={items} services={services} />;
 }
 
 export function getStaticProps() {
@@ -12,5 +13,6 @@ export function getStaticProps() {
     answer: guide.te.answer,
     updatedOn: guide.updatedOn,
   }));
-  return { props: { items } };
+  const services = teServiceSlugs.map((slug) => ({ href: teServicePath(slug), title: servicesTe[slug].title }));
+  return { props: { items, services } };
 }

@@ -46,7 +46,8 @@ Titles and descriptions live with the content. Services: `heading`, `seoTitle` a
   - **IndividualPhysician** for each doctor, with qualifications and specialties, linked to the hospital.
   - **MedicalWebPage** for specialty pages and guides, with medical specialty, publisher and (once reviewed) reviewer.
   - **BreadcrumbList** and **FAQPage**.
-  - No ratings, reviews, prices or coordinates are marked up; none are verified. FAQ markup doesn't guarantee a rich result.
+  - No ratings, reviews or prices are marked up; none are verified. Coordinates (`geo`) come from the Google Maps pin, and the hospital's state registration (file no. 01-325) is its `identifier`.
+  - Google stopped showing FAQ rich results in May 2026. The FAQ markup stays valid and the visible FAQs still help readers and AI answers; just don't expect FAQ snippets.
 - **One entity everywhere.** "Dhruva Hospitals", the same address, phone numbers and doctor names, on every page and in the structured data.
 - **Images.** Every content photo has a descriptive file name (old names redirect) and alt text that says what's in it; doctors are named only in their own portraits. Pages list their photos in the sitemap for Google Images, and the hospital and doctor structured data include the building, team and on-site doctor photos. Images are served as AVIF or WebP at the size each screen needs.
 - **Evidence of expertise.** Doctors' qualifications and training are on their profiles and specialty pages. Each specialty page shows the doctors' own YouTube videos on the topic. The paediatric guide cites the WHO's danger signs for sick children.

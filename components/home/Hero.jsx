@@ -22,9 +22,9 @@ export default function Hero() {
             <span className="eyebrow-dot" />
             Dhruva Hospitals, Kadapa
           </span>
-          <h1 className="text-4xl pt-5 font-extrabold leading-[1.08] tracking-tight text-neutral-950 sm:text-5xl lg:text-[3.4rem]">
+          <h2 className="text-4xl pt-5 font-extrabold leading-[1.08] tracking-tight text-neutral-950 sm:text-5xl lg:text-[3.4rem]">
             Trusted care for every stage of family life.
-          </h1>
+          </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-neutral-500">
             From fertility and pregnancy to newborn and family care, our
             experienced doctors and compassionate team are here to help your

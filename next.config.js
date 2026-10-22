@@ -16,6 +16,24 @@ const securityHeaders = [
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
   { key: 'Strict-Transport-Security', value: 'max-age=31536000' },
+  {
+    // Report-only for now: browsers log anything this policy would block, without blocking it.
+    // Once the console shows no violations, rename the key to Content-Security-Policy.
+    key: 'Content-Security-Policy-Report-Only',
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https://i.ytimg.com https://*.cdninstagram.com https://*.fbcdn.net",
+      "media-src 'self' https://*.cdninstagram.com https://*.fbcdn.net",
+      "frame-src https://www.youtube-nocookie.com https://www.instagram.com https://www.google.com https://maps.google.com",
+      "font-src 'self'",
+      "connect-src 'self'",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join('; '),
+  },
 ];
 
 const nextConfig = {
@@ -57,6 +75,10 @@ const nextConfig = {
     // Keep links from the previous dhruvahospitals.com site working.
     return [
       ...domainRedirects,
+      // /index served a second copy of the home page.
+      { source: '/index', destination: '/', permanent: true },
+      // There is no Telugu home page yet; the Telugu guides are the Telugu entry point.
+      { source: '/te', destination: '/te/guides', permanent: false },
       { source: '/neonatal', destination: '/services/neonatal', permanent: true },
       { source: '/neonatal-care', destination: '/services/neonatal', permanent: true },
       { source: '/privacy-policy', destination: '/privacy', permanent: true },

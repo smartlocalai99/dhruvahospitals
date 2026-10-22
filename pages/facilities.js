@@ -21,8 +21,8 @@ export default function FacilitiesPage() {
     >
       <PageHeader
         eyebrow="Facilities"
-        title="Built for Safety, Comfort, and Healing"
-        subtitle="Discover the patient-centric amenities that set Dhruva Hospitals apart."
+        title="Hospital Facilities in Kadapa: NICU, ICU and Operation Theatres"
+        subtitle="Built for safety, comfort and healing: the patient-centric amenities that set Dhruva Hospitals apart."
       />
 
       <section className="container-page py-16 sm:py-20">

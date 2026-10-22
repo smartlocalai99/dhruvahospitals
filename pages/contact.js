@@ -43,7 +43,7 @@ export default function ContactPage() {
   return (
     <Layout
       title="Contact & Directions in Kadapa"
-      description="Address, map, phone and WhatsApp for Dhruva Hospitals in Dwaraka Nagar, Kadapa, near the RTC bus stand. OPD 9 AM – 8 PM; 24/7 emergency on +91 90368 52311."
+      description="Address, map, phone and WhatsApp for Dhruva Hospitals at Sandhya Circle, Dwaraka Nagar, Kadapa, beside Raithu Bazar. OPD 9 AM – 8 PM; 24/7 emergency +91 90368 52311."
       jsonLd={[
         hospitalSchema(),
         breadcrumbSchema([
@@ -114,8 +114,16 @@ export default function ContactPage() {
                   {site.name}, {site.address.full}.
                 </address>
                 <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
-                  We are in Dwaraka Nagar, near the RTC bus stand and beside Raithu Bazar in Kadapa. Kadapa airport is
-                  about 12 km away.
+                  We are at Sandhya Circle in Dwaraka Nagar, beside Raithu Bazar and near the RTC bus stand in Kadapa
+                  (Cuddapah). Kadapa airport is about 12 km away.
+                </p>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
+                  Coming from Proddatur, Rayachoti, Pulivendula, Badvel, Rajampet, Mydukur or elsewhere in YSR Kadapa
+                  district? Take a bus to the Kadapa RTC bus stand; the hospital is nearby at Sandhya Circle. Call{' '}
+                  <a href={site.phones.main.href} className={linkClass}>
+                    {site.phones.main.display}
+                  </a>{' '}
+                  if you need directions.
                 </p>
               </div>
             </div>

@@ -1,8 +1,10 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
-export default function Document() {
+export default function Document({ __NEXT_DATA__ }) {
+  // Telugu pages live under /te/; everything else is English.
+  const lang = __NEXT_DATA__.page.startsWith('/te/') ? 'te-IN' : 'en-IN';
   return (
-    <Html lang="en-IN">
+    <Html lang={lang}>
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />

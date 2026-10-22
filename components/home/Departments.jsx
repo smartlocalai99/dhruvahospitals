@@ -53,7 +53,6 @@ const departments = [
 
 export default function Departments() {
   const [active, setActive] = useState(0);
-  const current = departments[active];
 
   return (
     <section className="container-page py-20 sm:py-28">
@@ -101,28 +100,34 @@ export default function Departments() {
         })}
       </div>
 
-      <div className="mt-12 grid gap-8 border-t border-neutral-100 pt-10 lg:grid-cols-[1fr_auto_1.4fr]">
-        <div className="max-w-sm">
-          <h3 className="text-xl font-semibold text-neutral-950">{current.label}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-neutral-500">{current.description}</p>
-          <Link href={current.href} className="text-link mt-4">
-            Learn more<span className="sr-only"> about {current.label}</span>
-            <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
-        <div className="hidden w-px bg-neutral-200 lg:block" />
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {current.tags.map((tag) => (
-            <Link
-              key={tag.label}
-              href={tag.href}
-              className="flex items-center justify-center rounded-full border border-navy-200 px-4 py-2.5 text-center text-sm font-medium text-navy-800 transition-colors hover:border-navy-400 hover:bg-navy-50"
-            >
-              {tag.label}
+      {/* Every department's panel is in the HTML (so search engines see all the links); only the selected one shows. */}
+      {departments.map((dept, i) => (
+        <div
+          key={dept.label}
+          className={i === active ? 'mt-12 grid gap-8 border-t border-neutral-100 pt-10 lg:grid-cols-[1fr_auto_1.4fr]' : 'hidden'}
+        >
+          <div className="max-w-sm">
+            <h3 className="text-xl font-semibold text-neutral-950">{dept.label}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-500">{dept.description}</p>
+            <Link href={dept.href} className="text-link mt-4">
+              Learn more<span className="sr-only"> about {dept.label}</span>
+              <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
             </Link>
-          ))}
+          </div>
+          <div className="hidden w-px bg-neutral-200 lg:block" />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {dept.tags.map((tag) => (
+              <Link
+                key={tag.label}
+                href={tag.href}
+                className="flex items-center justify-center rounded-full border border-navy-200 px-4 py-2.5 text-center text-sm font-medium text-navy-800 transition-colors hover:border-navy-400 hover:bg-navy-50"
+              >
+                {tag.label}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      ))}
     </section>
   );
 }

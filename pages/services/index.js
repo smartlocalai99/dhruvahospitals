@@ -10,7 +10,7 @@ export default function ServicesPage() {
   return (
     <Layout
       title="Medical Services in Kadapa"
-      description="Fertility & IVF, pregnancy care, gynaecology, cancer screening, neonatal & paediatric care, diagnostics, surgery and critical care at Dhruva Hospitals, Kadapa."
+      description="Pregnancy & delivery, gynaecology, IVF, paediatrics & NICU, general medicine, surgery, eye care, orthopaedics and diagnostics at Dhruva Hospitals, Kadapa."
       jsonLd={breadcrumbSchema([
         { name: 'Home', path: '/' },
         { name: 'Services', path: '/services' },
@@ -18,8 +18,8 @@ export default function ServicesPage() {
     >
       <PageHeader
         eyebrow="Services"
-        title="Advanced Medical Care for Every Stage of Life"
-        subtitle="From the miracle of new life to critical care, we provide comprehensive medical services using modern technology and proven protocols."
+        title="Medical Services at Dhruva Hospitals, Kadapa"
+        subtitle="Advanced medical care for every stage of life: from the miracle of new life to critical care, with modern technology and proven protocols."
       />
 
       <section className="container-page py-16 sm:py-20">

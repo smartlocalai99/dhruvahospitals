@@ -33,8 +33,8 @@ export default function DoctorsPage() {
     >
       <PageHeader
         eyebrow="Doctors"
-        title="Meet Our Dedicated Medical Experts"
-        subtitle="Compassionate professionals committed to clinical excellence and personalized patient healing."
+        title="Doctors at Dhruva Hospitals, Kadapa"
+        subtitle="Meet our dedicated medical experts: compassionate professionals committed to clinical excellence and personalised patient healing."
       />
 
       <section className="container-page py-16 sm:py-20">

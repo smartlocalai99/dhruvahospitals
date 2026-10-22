@@ -85,6 +85,25 @@ body {
   animation: countup-reveal 0s linear 3s forwards;
 }
 
+/* While counting, the real figure keeps its place (and stays readable to screen readers) but is
+   transparent; the running number is drawn on top from --countup-text (components/CountUp.jsx). */
+.countup {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.countup[data-countup='counting'] [data-countup-value] {
+  color: transparent;
+}
+
+.countup[data-countup='counting']::after {
+  content: var(--countup-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 @keyframes countup-reveal {
   to {
     visibility: visible;

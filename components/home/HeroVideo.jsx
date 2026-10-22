@@ -85,12 +85,14 @@ function whenIdle(callback) {
   return () => window.clearTimeout(id);
 }
 
+// Phones on mobile data keep the poster: the video is several megabytes. Wi-Fi visitors still get it.
 function prefersStill() {
   const connection = navigator.connection;
   return (
     window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
     Boolean(connection?.saveData) ||
-    /(^|-)2g$/.test(connection?.effectiveType || '')
+    /(^|-)2g$|^3g$/.test(connection?.effectiveType || '') ||
+    (connection?.type === 'cellular' && window.matchMedia(MOBILE_QUERY).matches)
   );
 }
 
@@ -244,17 +246,19 @@ export default function HeroVideo() {
 
       {/* No overlay on the video: the text sits on its own frosted navy panel so it stays readable over bright frames.
           Panel bottom-left; the glass cards sit bottom-right on large screens, under the panel on tablets, and are hidden on phones. */}
-      <div className="container-page relative z-10 flex flex-col justify-end pb-10 pt-32 lg:flex-row lg:items-end lg:justify-between lg:gap-12 lg:pb-[10svh] [@media(max-height:500px)]:pb-6 [@media(max-height:500px)]:pt-24">
+      {/* lg:pr-24 keeps the glass cards clear of the floating WhatsApp and call buttons. */}
+      <div className="container-page relative z-10 flex flex-col justify-end pb-10 pt-32 lg:flex-row lg:items-end lg:justify-between lg:gap-12 lg:pb-[10svh] lg:pr-24 [@media(max-height:500px)]:pb-6 [@media(max-height:500px)]:pt-24">
         <div className="max-w-2xl rounded-3xl bg-navy-900/70 p-6 ring-1 ring-inset ring-white/15 backdrop-blur-md sm:p-8 lg:p-10 [@media(max-height:500px)]:p-5">
-          <h2
+          {/* The page's only H1: it names what the hospital does and where. */}
+          <h1
             id="hero-video-title"
-            className="text-balance text-[clamp(2rem,9vw,2.5rem)] font-semibold leading-[1.04] tracking-[-0.02em] sm:text-6xl lg:text-7xl [@media(max-height:500px)]:text-4xl"
+            className="text-balance text-[clamp(2rem,9vw,2.5rem)] font-semibold leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-6xl [@media(max-height:500px)]:text-4xl"
           >
-            Advanced care, close to home
-          </h2>
+            Maternity, fertility and child care in Kadapa
+          </h1>
           <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg [@media(max-height:500px)]:mt-3 [@media(max-height:500px)]:text-base">
             IVF and fertility treatment, safe deliveries, a Level III NICU and 24/7 emergency care, all under one roof
-            in Kadapa.
+            at Dhruva Hospitals.
           </p>
           <BookCallButton
             label="Book Appointment"

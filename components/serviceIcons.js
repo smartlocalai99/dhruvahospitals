@@ -1,6 +1,8 @@
 import {
   LuActivity,
   LuBaby,
+  LuBone,
+  LuEye,
   LuHeartPulse,
   LuHospital,
   LuMicroscope,
@@ -22,6 +24,8 @@ export const serviceIcons = {
   diagnostics: LuMicroscope,
   surgery: LuScissors,
   'general-medicine': LuStethoscope,
+  ophthalmology: LuEye,
+  orthopaedics: LuBone,
 };
 
 // A service added to lib/data.js without an icon here still gets one.

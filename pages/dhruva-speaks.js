@@ -6,7 +6,7 @@ import InstagramReels from '@/components/instagram/InstagramReels';
 import InstagramWidget from '@/components/instagram/InstagramWidget';
 import { INSTAGRAM_REVALIDATE_SECONDS, getInstagramReels } from '@/lib/instagram';
 import { VIDEO_REVALIDATE_SECONDS, getLatestVideos } from '@/lib/youtube';
-import { breadcrumbSchema } from '@/lib/schema';
+import { breadcrumbSchema, videoObjectSchema } from '@/lib/schema';
 
 // Instagram first (the hospital posts there most), then the doctors' YouTube videos.
 export default function DhruvaSpeaksPage({ reels, videos }) {
@@ -14,15 +14,19 @@ export default function DhruvaSpeaksPage({ reels, videos }) {
     <Layout
       title="Health Videos & Reels from Our Doctors"
       description="Instagram reels, YouTube videos and practical health tips from the doctors at Dhruva Hospitals, Kadapa."
-      jsonLd={breadcrumbSchema([
-        { name: 'Home', path: '/' },
-        { name: 'Dhruva Speaks', path: '/dhruva-speaks' },
-      ])}
+      jsonLd={[
+        breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Dhruva Speaks', path: '/dhruva-speaks' },
+        ]),
+        // Videos from the live YouTube feed carry their upload date; the saved fallback list does not.
+        ...videos.filter((video) => video.published).map(videoObjectSchema),
+      ]}
     >
       <PageHeader
         eyebrow="Dhruva Speaks"
-        title="Trusted Health Guidance, From Our Doctors"
-        subtitle="Expert advice, practical health tips, and trusted guidance from the medical team at Dhruva Hospitals."
+        title="Health Videos from Doctors at Dhruva Hospitals"
+        subtitle="Trusted health guidance: expert advice and practical health tips from our medical team in Kadapa."
       />
 
       <section className="container-page pt-16 sm:pt-20">

@@ -7,13 +7,14 @@ import { formatDate, guideLanguages, guidePath } from '@/lib/guide-languages';
 import { breadcrumbSchema } from '@/lib/schema';
 
 // `items`: [{ slug, title, answer, updatedOn }] in this page's language.
-export default function GuideIndex({ lang, items }) {
+// `services`: [{ href, title }] service pages in this language, listed beside the guides.
+export default function GuideIndex({ lang, items, services = [] }) {
   const { ui, basePath, ogLocale } = guideLanguages[lang];
   const otherLang = lang === 'en' ? 'te' : 'en';
 
   return (
     <Layout
-      title={ui.indexTitle}
+      fullTitle={ui.indexSeoTitle}
       description={ui.indexSubtitle}
       ogLocale={ogLocale}
       alternates={['en', 'te'].map((code) => ({ hrefLang: guideLanguages[code].hrefLang, path: guideLanguages[code].basePath }))}
@@ -61,8 +62,25 @@ export default function GuideIndex({ lang, items }) {
               ))}
             </ul>
 
-            <aside className="lg:sticky lg:top-28 lg:self-start">
+            <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
               <NriHelpCard ui={ui} />
+              {services.length > 0 && (
+                <div className="rounded-2xl border border-neutral-200 p-6">
+                  <h2 className="text-base font-semibold text-neutral-950">{ui.services}</h2>
+                  <ul className="mt-4 space-y-3">
+                    {services.map((service) => (
+                      <li key={service.href}>
+                        <Link
+                          href={service.href}
+                          className="text-sm font-medium leading-snug text-navy-700 hover:text-navy-900 hover:underline"
+                        >
+                          {service.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </aside>
           </div>
         </section>

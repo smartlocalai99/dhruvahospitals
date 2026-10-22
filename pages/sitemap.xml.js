@@ -1,6 +1,7 @@
-import { doctors, gallery, hasProfile, services } from '@/lib/data';
+import { doctors, gallery, getService, hasProfile, services } from '@/lib/data';
 import { guidePath } from '@/lib/guide-languages';
 import { publishedGuides } from '@/lib/guides';
+import { teServicePath, teServiceSlugs } from '@/lib/services-te';
 import { absoluteUrl } from '@/lib/site';
 
 const staticPaths = [
@@ -30,6 +31,7 @@ function buildSitemap() {
   const entries = [
     ...staticPaths.map((path) => ({ path, images: pageImages[path] })),
     ...services.map((service) => ({ path: `/services/${service.slug}`, images: [service.image] })),
+    ...teServiceSlugs.map((slug) => ({ path: teServicePath(slug), images: [getService(slug).image] })),
     ...doctors.filter(hasProfile).map((doctor) => ({
       path: `/doctors/${doctor.slug}`,
       images: [doctor.image, doctor.photoAtHospital].filter(Boolean),

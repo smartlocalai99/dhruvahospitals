@@ -8,6 +8,7 @@ import { stats } from '@/lib/data';
 import Link from 'next/link';
 import KeyFacts from '@/components/KeyFacts';
 import { site, googleMapsUrl } from '@/lib/site';
+import { formatDate } from '@/lib/guide-languages';
 import { breadcrumbSchema, hospitalSchema } from '@/lib/schema';
 
 const strengths = [
@@ -60,8 +61,8 @@ const infrastructure = [
 export default function AboutPage() {
   return (
     <Layout
-      title="About Dhruva Hospitals, Kadapa"
-      description="Dhruva Hospitals is a hospital in Kadapa, Andhra Pradesh, for pregnancy, gynaecology, IVF, paediatrics and newborn intensive care, with 24/7 emergency services."
+      fullTitle="About Dhruva Hospitals, Kadapa: Founder, Departments & Registration"
+      description="Dhruva Hospitals, Kadapa opened on 1 May 2026: a registered 20-bed hospital for pregnancy, gynaecology, IVF, paediatrics, NICU, surgery, eye and bone care."
       jsonLd={[
         hospitalSchema(),
         breadcrumbSchema([
@@ -72,8 +73,8 @@ export default function AboutPage() {
     >
       <PageHeader
         eyebrow="About Us"
-        title="Advanced Healthcare, Built Around People"
-        subtitle="Dhruva Hospitals brings trusted medical expertise, modern healthcare standards, and compassionate care closer to the families of Kadapa."
+        title="About Dhruva Hospitals, Kadapa"
+        subtitle="Advanced healthcare, built around people: Dhruva Hospitals brings trusted medical expertise, modern healthcare standards, and compassionate care closer to the families of Kadapa."
       />
 
       <section className="container-page py-16 sm:py-20">
@@ -114,25 +115,34 @@ export default function AboutPage() {
                 </>
               ),
             },
+            { label: 'Opened', value: formatDate(site.foundingDate) },
             {
-              label: 'Main specialties',
+              label: 'Founder and Chairman',
+              value: (
+                <Link href="/doctors/dr-sudarshan-reddy" className="text-navy-700 hover:underline">
+                  Dr. Sudarshan Reddy K (MBBS, DNB Paediatrics, Fellowship in Neonatology)
+                </Link>
+              ),
+            },
+            {
+              label: 'Departments',
               value: (
                 <>
-                  <Link href="/services/pregnancy" className="text-navy-700 hover:underline">Pregnancy & delivery</Link>,{' '}
-                  <Link href="/services/gynaecology" className="text-navy-700 hover:underline">gynaecology</Link>,{' '}
-                  <Link href="/services/fertility" className="text-navy-700 hover:underline">fertility & IVF</Link>,{' '}
-                  <Link href="/services/paediatrics" className="text-navy-700 hover:underline">paediatrics</Link> and a{' '}
-                  <Link href="/services/neonatal" className="text-navy-700 hover:underline">Level III NICU</Link>
+                  <Link href="/services/paediatrics" className="text-navy-700 hover:underline">Paediatrics</Link> and{' '}
+                  <Link href="/services/neonatal" className="text-navy-700 hover:underline">neonatology (Level III NICU)</Link>,{' '}
+                  <Link href="/services/pregnancy" className="text-navy-700 hover:underline">obstetrics</Link>,{' '}
+                  <Link href="/services/gynaecology" className="text-navy-700 hover:underline">gynaecology</Link> and{' '}
+                  <Link href="/services/fertility" className="text-navy-700 hover:underline">infertility</Link>,{' '}
+                  <Link href="/services/general-medicine" className="text-navy-700 hover:underline">general medicine</Link>,{' '}
+                  <Link href="/services/surgery" className="text-navy-700 hover:underline">general surgery</Link>,{' '}
+                  <Link href="/services/ophthalmology" className="text-navy-700 hover:underline">ophthalmology</Link> and{' '}
+                  <Link href="/services/orthopaedics" className="text-navy-700 hover:underline">orthopaedics</Link>
                 </>
               ),
             },
             {
-              label: 'Chairman',
-              value: (
-                <Link href="/doctors/dr-sudarshan-reddy" className="text-navy-700 hover:underline">
-                  Dr. Sudarshan Reddy K, Senior Consultant – Paediatrics & Neonatology
-                </Link>
-              ),
+              label: 'Registration',
+              value: `Registered under the ${site.registration.act} (file no. ${site.registration.fileNumber}, valid until ${formatDate(site.registration.validUntil)}); ${site.registration.beds} beds`,
             },
             { label: 'Hours', value: `OPD ${site.hours.opd}; emergency, ICU and NICU 24/7` },
             {
@@ -165,10 +175,10 @@ export default function AboutPage() {
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
           <div className="space-y-5 text-sm leading-relaxed text-neutral-600 sm:text-base">
             <p>
-              Dhruva Hospitals was founded with a single vision: to bring world-class healthcare within reach of every family in Rayalaseema. Situated in the heart of Kadapa at Dwaraka Nagar, our hospital bridges the gap between high-end medical infrastructure and compassionate, community-focused healing.
+              Dhruva Hospitals opened on 1 May 2026, founded by Dr. Sudarshan Reddy K with a single vision: to bring world-class healthcare within reach of every family in Rayalaseema. Situated in the heart of Kadapa at Dwaraka Nagar, beside Raithu Bazar at Sandhya Circle, our hospital bridges the gap between high-end medical infrastructure and compassionate, community-focused healing.
             </p>
             <p>
-              From fertility treatment and pregnancy care to complex laparoscopic procedures and neonatal intensive care, our medical philosophy combines clinical precision with genuine human empathy. Led by our Chairman, Dr. Sudarshan Reddy K, and backed by a team of dedicated specialists, modern medical equipment, and stringent standards of hygiene, Dhruva Hospitals stands as your reliable healthcare partner through every stage of life.
+              From fertility treatment and pregnancy care to complex laparoscopic procedures and neonatal intensive care, our medical philosophy combines clinical precision with genuine human empathy. Led by our founder and Chairman, Dr. Sudarshan Reddy K, and backed by a team of dedicated specialists in paediatrics, obstetrics and gynaecology, general medicine, general surgery, ophthalmology and orthopaedics, Dhruva Hospitals stands as your reliable healthcare partner through every stage of life.
             </p>
             <figure className="border-l-4 border-navy-700 pl-5">
               <blockquote className="text-lg font-semibold text-neutral-950">
