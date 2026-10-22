@@ -17,7 +17,7 @@ Copy `.env.example` to `.env.local` and fill in the values. On Vercel, add them 
 
 | Variable | Purpose |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Public URL, e.g. `https://www.dhruvahospitals.com`. Used for canonical links, social previews, the sitemap and structured data. On Vercel it defaults to the project's production domain. |
+| `NEXT_PUBLIC_SITE_URL` | Optional. Public URL used for canonical links, social previews, the sitemap and structured data. Defaults to `https://www.dhruvahospitals.com` on every deployment (production, preview and local); set it only if the site moves to another domain, and never to the `vercel.app` address. |
 | `INSTAGRAM_ACCESS_TOKEN` | Optional. Shows the newest Instagram reels on the home page and Dhruva Speaks, playable on the site. See [Instagram reels](#instagram-reels). |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Optional. The code from Google Search Console's "HTML tag" verification method (only the `content` value). Not needed if you verify with DNS. |
 | `NEXT_PUBLIC_BING_SITE_VERIFICATION` | Optional. The code from Bing Webmaster Tools' meta-tag verification. |
@@ -77,5 +77,6 @@ The token lasts 60 days, so repeat steps 3 and 4 before then (a calendar reminde
 - `/sitemap.xml` and `/robots.txt` are generated from the routes and data above.
 - Pages include canonical URLs, Open Graph/Twitter tags and schema.org data (Hospital, Physician, FAQ, breadcrumbs).
 - Old URLs (`/neonatal`, `/neonatal-care`, `/privacy-policy`, `/book-appointment`) redirect to their new pages (`next.config.js`).
+- `dhruvahospitals.vercel.app` permanently redirects to the same path on `https://www.dhruvahospitals.com` (`next.config.js`); preview deployments keep their own addresses. The bare `dhruvahospitals.com` redirects to `www` in Vercel → Project → Settings → Domains.
 - Specialty pages take their H1, title tag, meta description, FAQs and videos from `lib/data.js` and `lib/service-details.js`.
 - The SEO plan, Google Business Profile checklist and monitoring checklist are in [`docs/SEO.md`](docs/SEO.md).

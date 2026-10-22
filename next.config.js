@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 
 // Public URL used for canonical links, Open Graph tags, the sitemap and structured data.
-// Set NEXT_PUBLIC_SITE_URL in production; on Vercel the project's production domain is used automatically.
-const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : 'https://dhruvahospitals.vercel.app')
-).replace(/\/+$/, '');
+// Every deployment (production, preview, local) uses the real domain so search engines only ever
+// see one address. NEXT_PUBLIC_SITE_URL overrides it only if the site moves to another domain.
+const productionUrl = 'https://www.dhruvahospitals.com';
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || productionUrl).replace(/\/+$/, '');
+
+// The project's default Vercel address serves the same site; send it to the real domain.
+// Preview deployments have their own hostnames and are not affected.
+const vercelProductionHost = 'dhruvahospitals.vercel.app';
 
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -40,8 +41,22 @@ const nextConfig = {
     ];
   },
   async redirects() {
+    const domainRedirects =
+      new URL(siteUrl).host === vercelProductionHost
+        ? []
+        : [
+            {
+              // Path and query string are kept: /about?x=1 -> https://www.dhruvahospitals.com/about?x=1
+              source: '/:path*',
+              has: [{ type: 'host', value: vercelProductionHost.replace(/\./g, '\\.') }],
+              destination: `${siteUrl}/:path*`,
+              permanent: true,
+            },
+          ];
+
     // Keep links from the previous dhruvahospitals.com site working.
     return [
+      ...domainRedirects,
       { source: '/neonatal', destination: '/services/neonatal', permanent: true },
       { source: '/neonatal-care', destination: '/services/neonatal', permanent: true },
       { source: '/privacy-policy', destination: '/privacy', permanent: true },

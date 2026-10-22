@@ -30,7 +30,10 @@ export default function Layout({
   const router = useRouter();
   const pageTitle = fullTitle || (title ? `${title} | Dhruva Hospitals` : 'Dhruva Hospitals');
   const pageDescription = description || site.description;
-  const pageUrl = absoluteUrl(router.asPath.split(/[?#]/)[0]);
+  // Built from the route, not router.asPath: when Next.js regenerates a page in the background
+  // (ISR), asPath for the home page is "/index", and query strings must never reach the canonical.
+  const canonicalPath = router.pathname.replace(/\[(\w+)\]/g, (_, key) => router.query[key]);
+  const pageUrl = absoluteUrl(canonicalPath);
   const imageUrl = absoluteUrl(image);
   const schemas = jsonLd ? [].concat(jsonLd) : [];
 
@@ -39,8 +42,7 @@ export default function Layout({
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="canonical" href={pageUrl} />
-        {noindex && <meta name="robots" content="noindex" />}
+        {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={pageUrl} />}
         <meta property="og:type" content="website" />
         <meta property="og:locale" content={ogLocale} />
         {alternates.map((alternate) => (
@@ -55,7 +57,7 @@ export default function Layout({
         <meta property="og:site_name" content="Dhruva Hospitals" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
-        <meta property="og:url" content={pageUrl} />
+        {!noindex && <meta property="og:url" content={pageUrl} />}
         <meta property="og:image" content={imageUrl} />
         <meta property="og:image:alt" content={imageAlt} />
         <meta name="twitter:card" content="summary_large_image" />

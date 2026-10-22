@@ -7,8 +7,8 @@ Priority: be found for **gynaecology and paediatrics in Kadapa**, by local famil
 ## 1. Launch-critical (do these first)
 
 1. **One site, one domain.** The old site (www.dhruvahospitals.com, built by mstechhive) and this site (dhruvahospitals.vercel.app) carry the same content. Until one replaces the other, they compete.
-   - Point `www.dhruvahospitals.com` at this Vercel project (Vercel → Project → Settings → Domains). Make the bare domain and the `vercel.app` address redirect to it.
-   - Set `NEXT_PUBLIC_SITE_URL=https://www.dhruvahospitals.com` in Vercel, then redeploy. Canonical tags, the sitemap and structured data all switch to the real domain.
+   - Point `www.dhruvahospitals.com` at this Vercel project (Vercel → Project → Settings → Domains) and make the bare domain redirect to it. The `vercel.app` address redirects to it from `next.config.js`.
+   - Canonical tags, the sitemap, `robots.txt` and structured data use `https://www.dhruvahospitals.com` on every deployment (`next.config.js`). Leave `NEXT_PUBLIC_SITE_URL` unset in Vercel, or set it to that exact address.
    - The old site's paths already match (`/about`, `/contact`, `/doctors`, `/services/*`). `/neonatal` and `/neonatal-care` redirect to `/services/neonatal`.
 2. **Google Search Console.** Add a Domain property for `dhruvahospitals.com` (DNS verification), or set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`. Submit `https://www.dhruvahospitals.com/sitemap.xml`.
 3. **Google Business Profile.** Make the profile's name, address and phone match the website exactly (section 6).
