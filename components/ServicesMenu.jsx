@@ -64,7 +64,7 @@ export default function ServicesMenu({ active, textClass }) {
         aria-expanded={open}
         aria-controls="services-menu"
         onClick={() => setOpen((value) => !value)}
-        className={`flex items-center gap-1 text-[15px] font-medium transition-colors ${textClass}`}
+        className={`flex items-center gap-1 whitespace-nowrap text-[15px] font-medium transition-colors ${textClass}`}
       >
         Services
         <LuChevronDown

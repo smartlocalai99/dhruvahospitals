@@ -1,4 +1,5 @@
 import ServiceArticle from '@/components/services/ServiceArticle';
+import { postPath, postsForService } from '@/lib/blog';
 import { getService, services, whyChooseUs } from '@/lib/data';
 import { guidePath } from '@/lib/guide-languages';
 import { guideLinks } from '@/lib/guides';
@@ -19,7 +20,7 @@ const emergencyBanners = {
   },
 };
 
-export default function ServicePage({ slug, guides, faqs, videos, sources, showAbroad, teluguPath }) {
+export default function ServicePage({ slug, guides, articles, faqs, videos, sources, showAbroad, teluguPath }) {
   const path = `/services/${slug}`;
   const otherServices = services
     .filter((item) => item.slug !== slug)
@@ -34,6 +35,7 @@ export default function ServicePage({ slug, guides, faqs, videos, sources, showA
       videos={videos}
       sources={sources}
       guides={guides}
+      articles={articles}
       otherServices={otherServices}
       whyChoose={whyChooseUs}
       banner={emergencyBanners[slug]}
@@ -66,6 +68,7 @@ export function getStaticProps({ params }) {
     props: {
       slug,
       guides: guideLinks('en', serviceGuideSlugs[slug] || []).map((guide) => ({ href: guidePath(guide.slug), title: guide.title })),
+      articles: postsForService(slug).map((post) => ({ href: postPath(post.slug), title: post.title })),
       faqs,
       videos,
       sources,

@@ -14,6 +14,7 @@ const navLinks = [
   { href: '/facilities', label: 'Facilities' },
   { href: '/doctors', label: 'Doctors' },
   { href: '/dhruva-speaks', label: 'Dhruva speaks' },
+  { href: '/blog', label: 'Health Blog' },
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -75,7 +76,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-9 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-8" aria-label="Primary">
           {navLinks.map((link) => {
             const active = isActive(router.pathname, link.href);
             // The current page is marked in brand navy with an underline (light grey failed contrast).
@@ -92,7 +93,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
-                className={`text-[15px] font-medium transition-colors ${textClass}`}
+                className={`whitespace-nowrap text-[15px] font-medium transition-colors ${textClass}`}
               >
                 {link.label}
               </Link>
@@ -101,7 +102,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <BookCallButton label="Book now" />
+          <BookCallButton label="Book now" className="btn-primary whitespace-nowrap" />
         </div>
 
         <button

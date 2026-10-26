@@ -14,6 +14,7 @@ const pageLinks = [
   { href: '/doctors', label: 'Doctors' },
   { href: '/dhruva-speaks', label: 'Dhruva Speaks' },
   { href: '/guides', label: 'Patient Guides' },
+  { href: '/blog', label: 'Health Blog' },
   { href: '/nri', label: 'NRI Care' },
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact Us' },

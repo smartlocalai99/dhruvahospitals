@@ -73,6 +73,15 @@ Publish only for services the hospital offers, with a named clinical reviewer. W
 
 Reuse the doctors' YouTube Shorts and Instagram Reels as the video version of each topic.
 
+### Health blog (`/blog`)
+
+50 articles (October 2026) answer the questions people search for in and around Kadapa: pregnancy, newborn care, children's health, women's health, fertility and IVF, and general health. Content lives in `lib/blog/*.js`, one file per category; the format is described in `lib/blog/index.js`.
+
+- Every fact is taken from a cited source (NHS, WHO, India's National Health Mission, ADA, ACOG, HFEA, the national ART portal) or from the hospital's own service list. Do not add success rates, prices or claims the hospital cannot back up.
+- **Clinical review:** each article names its specialist (`doctor`) but shows no reviewer until `reviewedOn` is set. After the doctor has read and approved an article, set `reviewedOn` to that date (YYYY-MM-DD) and update `updatedOn`. The article then shows "Clinical reviewer" with the doctor's name and profile link.
+- When an article changes, update `updatedOn`; the sitemap uses it as `lastmod`.
+- Articles appear in the sitemap, on `/blog`, and in a "Health Articles" box on the matching service page.
+
 ## 6. Google Business Profile checklist (needs the profile owner)
 
 - [ ] Name: **Dhruva Hospitals** (no keywords added to the name).
@@ -104,7 +113,8 @@ Reuse the doctors' YouTube Shorts and Instagram Reels as the video version of ea
 Fields marked `null` in the code are hidden on the site until filled in.
 
 - Doctors' medical registration numbers and OPD timings (`lib/data.js`).
-- Clinical review dates for each guide (`lib/guides.js`).
+- Clinical review dates for each guide (`lib/guides.js`) and each blog article (`reviewedOn` in `lib/blog/*.js`).
+- The hospital's ART (Regulation) Act registration number, to show on the fertility pages.
 - Prices for delivery, C-section and NICU per day, and the NRI packages (`lib/guides.js`, `lib/nri.js`). The cost guide stays unpublished until then.
 - NRI coordinator's name and Gulf-time hours (`lib/nri.js`).
 - Confirmation of the NRI services: pre-arrival video consult, attendant stay, airport pickup.

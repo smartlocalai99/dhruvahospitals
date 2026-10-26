@@ -10,6 +10,21 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || productionUrl).replace(/\/+
 // Preview deployments have their own hostnames and are not affected.
 const vercelProductionHost = 'dhruvahospitals.vercel.app';
 
+// Literal dynamic-route patterns (e.g. "/services/[slug]") and the section each belongs to. Crawlers
+// request them with raw or percent-encoded brackets, so both spellings are matched.
+const routePatternRedirects = [
+  ['/services', '/services'],
+  ['/te/services', '/services'],
+  ['/doctors', '/doctors'],
+  ['/guides', '/guides'],
+  ['/te/guides', '/te/guides'],
+  ['/blog', '/blog'],
+].map(([base, destination]) => ({
+  source: `${base}/:pattern(\\[slug\\]|%5Bslug%5D|%5bslug%5d)`,
+  destination,
+  permanent: true,
+}));
+
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
@@ -79,6 +94,12 @@ const nextConfig = {
       { source: '/index', destination: '/', permanent: true },
       // There is no Telugu home page yet; the Telugu guides are the Telugu entry point.
       { source: '/te', destination: '/te/guides', permanent: false },
+      // Google reads route patterns such as /services/[slug] from the site's JavaScript and reports
+      // them as 404s in Search Console; send them to the matching section instead.
+      ...routePatternRedirects,
+      // Specialists without a profile page yet: their addresses lead to their department.
+      { source: '/doctors/dr-vasanta-kumari', destination: '/services/ophthalmology', permanent: false },
+      { source: '/doctors/dr-someshwar-reddy', destination: '/services/orthopaedics', permanent: false },
       { source: '/neonatal', destination: '/services/neonatal', permanent: true },
       { source: '/neonatal-care', destination: '/services/neonatal', permanent: true },
       { source: '/privacy-policy', destination: '/privacy', permanent: true },

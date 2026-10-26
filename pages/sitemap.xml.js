@@ -2,6 +2,7 @@ import { doctors, gallery, getService, hasProfile, services } from '@/lib/data';
 import { guidePath } from '@/lib/guide-languages';
 import { publishedGuides } from '@/lib/guides';
 import { teServicePath, teServiceSlugs } from '@/lib/services-te';
+import { getCategory, postPath, posts } from '@/lib/blog';
 import { absoluteUrl } from '@/lib/site';
 
 const staticPaths = [
@@ -13,6 +14,7 @@ const staticPaths = [
   '/nri',
   '/guides',
   '/te/guides',
+  '/blog',
   '/about',
   '/contact',
   '/privacy',
@@ -36,6 +38,7 @@ function buildSitemap() {
       path: `/doctors/${doctor.slug}`,
       images: [doctor.image, doctor.photoAtHospital].filter(Boolean),
     })),
+    ...posts.map((post) => ({ path: postPath(post.slug), lastmod: post.updatedOn, images: [getCategory(post.category).image] })),
     ...publishedGuides.flatMap((guide) =>
       ['en', 'te'].map((lang) => ({ path: guidePath(guide.slug, lang), lastmod: guide.updatedOn }))
     ),

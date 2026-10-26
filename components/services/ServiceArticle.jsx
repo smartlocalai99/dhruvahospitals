@@ -30,6 +30,7 @@ export default function ServiceArticle({
   videos = [],
   sources = [],
   guides = [],
+  articles = [],
   otherServices = [],
   whyChoose = [],
   banner,
@@ -290,6 +291,32 @@ export default function ServiceArticle({
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {articles.length > 0 && (
+                <div className="rounded-3xl border border-navy-200 p-7">
+                  <h2 className="text-lg font-semibold text-neutral-950">{ui.articlesTitle}</h2>
+                  <ul className="mt-4 divide-y divide-neutral-100">
+                    {articles.map((article) => (
+                      <li key={article.href}>
+                        <Link
+                          href={article.href}
+                          className="group flex items-center justify-between gap-3 py-3 text-sm font-medium text-neutral-800 transition-colors hover:text-navy-700"
+                        >
+                          {article.title}
+                          <ArrowRightIcon
+                            className="h-4 w-4 flex-none text-navy-300 transition-transform group-hover:translate-x-0.5 group-hover:text-navy-700"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/blog" className="text-link mt-4">
+                    {ui.allArticles}
+                    <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
+                  </Link>
                 </div>
               )}
 
