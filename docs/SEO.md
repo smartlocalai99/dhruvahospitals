@@ -85,7 +85,7 @@ Reuse the doctors' YouTube Shorts and Instagram Reels as the video version of ea
 ## 6. Google Business Profile checklist (needs the profile owner)
 
 - [ ] Name: **Dhruva Hospitals** (no keywords added to the name).
-- [ ] Address exactly as the website: Venu Gopal House, 1/705-1, Beside Raithu Bazar, Dwaraka Nagar, Old Kadapa, Andhra Pradesh 516001. Remove the stray "s reddy hospital" from the address lines, and check that the pin is on the building.
+- [ ] The website uses the profile's address exactly: Venu Gopal House, S Reddy Hospital, 1/705-1, Beside Raithu Bazar, Dwaraka Nagar, Old, Kadapa, Andhra Pradesh 516001. If the profile address changes, change `lib/site.js` to match. Check that the pin is on the building.
 - [ ] Primary phone +91 99599 59694; add +91 99599 59693 and the landline as additional numbers.
 - [ ] Website: `https://www.dhruvahospitals.com/`; appointment link: `https://www.dhruvahospitals.com/contact`.
 - [ ] Categories: primary **Hospital**. Add secondary categories that match real services (for example maternity, fertility or emergency care, whichever the dropdown offers).
