@@ -2,6 +2,7 @@ import Layout from '@/components/Layout';
 import HeroVideo from '@/components/home/HeroVideo';
 import Hero from '@/components/home/Hero';
 import HealthTips from '@/components/HealthTips';
+import HealthQuestions from '@/components/home/HealthQuestions';
 import Departments from '@/components/home/Departments';
 import Services from '@/components/home/Services';
 import FacilitiesTeaser from '@/components/home/FacilitiesTeaser';
@@ -14,12 +15,13 @@ import NriTeaser from '@/components/home/NriTeaser';
 import WhyChoose from '@/components/home/WhyChoose';
 import InstagramLatest from '@/components/home/InstagramLatest';
 import { faqs } from '@/lib/data';
+import { getCategory, getPost, homeQuestions, postPath } from '@/lib/blog';
 import { guideLinks } from '@/lib/guides';
 import { VIDEO_REVALIDATE_SECONDS, getLatestVideos } from '@/lib/youtube';
 import { INSTAGRAM_REVALIDATE_SECONDS, getInstagramReels } from '@/lib/instagram';
 import { faqSchema, hospitalSchema, websiteSchema } from '@/lib/schema';
 
-export default function Home({ guides, videos, reels }) {
+export default function Home({ guides, videos, reels, questions }) {
   return (
     <Layout
       fullTitle="Dhruva Hospitals, Kadapa – Gynaecology, Pregnancy & Child Care"
@@ -30,6 +32,7 @@ export default function Home({ guides, videos, reels }) {
       <Hero />
       <WhyChoose />
       <HealthTips className="pt-20 sm:pt-28" videos={videos} />
+      <HealthQuestions className="pt-20 sm:pt-28" questions={questions} />
       <Departments />
       <Services />
       <NriTeaser guides={guides} />
@@ -52,6 +55,11 @@ export async function getStaticProps() {
       guides: guideLinks('en', ['delivering-in-kadapa-from-dubai', 'nicu-levels-of-care', 'baby-birth-certificate-aadhaar-passport-nri']),
       videos,
       reels,
+      questions: homeQuestions.map(({ slug, question }) => ({
+        href: postPath(slug),
+        question,
+        topic: getCategory(getPost(slug).category).label,
+      })),
     },
     revalidate: Math.min(VIDEO_REVALIDATE_SECONDS, INSTAGRAM_REVALIDATE_SECONDS),
   };

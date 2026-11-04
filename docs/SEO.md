@@ -81,6 +81,7 @@ Reuse the doctors' YouTube Shorts and Instagram Reels as the video version of ea
 - **Clinical review:** each article names its specialist (`doctor`) but shows no reviewer until `reviewedOn` is set. After the doctor has read and approved an article, set `reviewedOn` to that date (YYYY-MM-DD) and update `updatedOn`. The article then shows "Clinical reviewer" with the doctor's name and profile link.
 - When an article changes, update `updatedOn`; the sitemap uses it as `lastmod`.
 - Articles appear in the sitemap, on `/blog`, and in a "Health Articles" box on the matching service page.
+- **Match how people search.** Once a month, read the queries in Search Console (Performance) and phrase article titles, short answers and headings the way people ask: "which is better normal delivery or c section", "what is pcod". Never change a slug; update `updatedOn`. The home page links the most-searched questions (`homeQuestions` in `lib/blog/index.js`).
 
 ## 6. Google Business Profile checklist (needs the profile owner)
 
