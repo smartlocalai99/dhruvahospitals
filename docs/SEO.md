@@ -113,7 +113,8 @@ The hospital's open-access guide, "Hospital in Kadapa for Child Care, Pregnancy 
   - the Country filter for **United Arab Emirates** and **Kuwait**;
   - clicks and click-through rate for each specialty page.
 - [ ] Check the Indexing → Pages and Core Web Vitals reports monthly.
-- [ ] Analytics isn't installed. If wanted, **Vercel Web Analytics** (cookie-free) is the lightest option. Count call, WhatsApp and directions clicks as events. Never send names, phone numbers or health details to analytics.
+- [x] Google Tag Manager `GTM-N9D4XF64` is installed in the site code; its published container includes Google Analytics destination `G-3K3W3ZX3GZ`.
+- [ ] After deployment, verify page views in Google Analytics → Reports → Realtime and Tag Manager Preview. Configure call, WhatsApp and directions clicks as events if needed. Never send names, phone numbers or health details to analytics.
 
 ## 8. Facts waiting on the hospital
 

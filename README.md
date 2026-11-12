@@ -75,6 +75,14 @@ To also show the newest reels as cards that play on the site, connect the Instag
 
 The token lasts 60 days, so repeat steps 3 and 4 before then (a calendar reminder helps). If it expires, the site quietly goes back to the Instagram widget; nothing breaks.
 
+## Google Analytics
+
+Google Tag Manager container `GTM-N9D4XF64` loads once across all pages through `pages/_app.js`, with its no-JavaScript fallback in `pages/_document.js`. No extra environment variables are needed.
+
+The published container includes Google Analytics destination `G-3K3W3ZX3GZ` and browser-history page-view tracking (verified 6 November 2026). Manage the Google tag in [Google Tag Manager](https://tagmanager.google.com/); do not add a second GA script or manual route-change page views, which would duplicate the container's tracking.
+
+After deploying, open the website and check the matching property's **Reports → Realtime** in [Google Analytics](https://analytics.google.com/). Use Tag Manager's **Preview** to confirm `page_view` events on the first page and when navigating between pages. See [Google's verification guide](https://support.google.com/tagmanager/answer/14842769).
+
 ## SEO
 
 - `/sitemap.xml` and `/robots.txt` are generated from the routes and data above.

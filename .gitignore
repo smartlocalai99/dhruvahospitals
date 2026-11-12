@@ -29,3 +29,4 @@ yarn-error.log*
 
 # original source media (too large for git / not served)
 /media-source/
+.env*
