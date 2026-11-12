@@ -73,6 +73,10 @@ Publish only for services the hospital offers, with a named clinical reviewer. W
 
 Reuse the doctors' YouTube Shorts and Instagram Reels as the video version of each topic.
 
+### Family guide on Zenodo
+
+The hospital's open-access guide, "Hospital in Kadapa for Child Care, Pregnancy and Fertility", is published on Zenodo with DOI 10.5281/zenodo.24152174 (CC BY 4.0). It links back to the website. The site links to it from the pregnancy, gynaecology, paediatrics, NICU and fertility pages and lists it as `subjectOf` in the hospital's structured data; details live in `site.familyGuide` in `lib/site.js`. The PDF says clinical review is pending: once the doctors have reviewed it, publish a new version on Zenodo.
+
 ### Health blog (`/blog`)
 
 50 articles (October 2026) answer the questions people search for in and around Kadapa: pregnancy, newborn care, children's health, women's health, fertility and IVF, and general health. Content lives in `lib/blog/*.js`, one file per category; the format is described in `lib/blog/index.js`.
@@ -100,6 +104,8 @@ Reuse the doctors' YouTube Shorts and Instagram Reels as the video version of ea
 
 ## 7. Search Console, analytics and monitoring (needs account access)
 
+- [ ] **Bing:** sign in to Bing Webmaster Tools and import the site from Google Search Console. Bing also feeds Yahoo, DuckDuckGo, Microsoft Copilot and ChatGPT search; in November 2026 it had no pages from the site.
+- [ ] **IndexNow:** after a deploy that adds or changes pages, run `npm run indexnow`. It sends the sitemap's URLs to Bing and the other IndexNow engines. The key is in `scripts/indexnow.mjs` and must match `public/<key>.txt`.
 - [ ] Verify Search Console (DNS) and submit the sitemap. Also verify Bing Webmaster Tools (`NEXT_PUBLIC_BING_SITE_VERIFICATION` or DNS); Bing's index also powers Microsoft Copilot's answers.
 - [ ] Record a **baseline** in the first 4 weeks before judging any change.
 - [ ] Track in Search Console → Performance:

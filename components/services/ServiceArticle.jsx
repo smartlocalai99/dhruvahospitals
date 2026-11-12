@@ -9,7 +9,7 @@ import EmergencyBanner from '@/components/EmergencyBanner';
 import KeyFacts from '@/components/KeyFacts';
 import PcpndtNotice from '@/components/PcpndtNotice';
 import YouTubeShort from '@/components/YouTubeShort';
-import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, LocationIcon } from '@/components/Icons';
+import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, ExternalLinkIcon, LocationIcon } from '@/components/Icons';
 import { getDoctor, hasProfile } from '@/lib/data';
 import { googleMapsUrl, site, whatsappLink } from '@/lib/site';
 import { breadcrumbSchema, faqSchema, serviceWebPageSchema } from '@/lib/schema';
@@ -291,6 +291,23 @@ export default function ServiceArticle({
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {site.familyGuide.services.includes(service.slug) && (
+                <div className="rounded-3xl border border-navy-200 p-7">
+                  <h2 className="text-lg font-semibold text-neutral-950">{ui.guideBoxTitle}</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-600">{ui.guideBoxText}</p>
+                  <a
+                    href={site.familyGuide.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-link mt-4"
+                  >
+                    {ui.guideBoxLink}
+                    <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                  <p className="mt-3 text-xs text-neutral-500">DOI: {site.familyGuide.doi}</p>
                 </div>
               )}
 

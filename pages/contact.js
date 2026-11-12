@@ -118,6 +118,10 @@ export default function ContactPage() {
                   (Cuddapah). Kadapa airport is about 12 km away.
                 </p>
                 <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
+                  Landmarks: Google Maps labels Sandhya Circle as Pylon Circle, about 100 metres from the hospital. The
+                  building sits between Dwaraka Nagar and Yerramukkapalli, and the Kadapa RTC bus stand is about 1 km away.
+                </p>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
                   Coming from Proddatur, Rayachoti, Pulivendula, Badvel, Rajampet, Mydukur or elsewhere in YSR Kadapa
                   district? Take a bus to the Kadapa RTC bus stand; the hospital is nearby at Sandhya Circle. Call{' '}
                   <a href={site.phones.main.href} className={linkClass}>

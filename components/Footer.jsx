@@ -67,6 +67,7 @@ export default function Footer() {
           <address className="mt-4 max-w-sm text-sm not-italic leading-relaxed text-navy-100">
             {site.address.full}.
           </address>
+          <p className="mt-2 max-w-sm text-sm leading-relaxed text-navy-100">{site.landmarks}.</p>
 
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-navy-200">
             Registered under the {site.registration.act}, file no. {site.registration.fileNumber}.

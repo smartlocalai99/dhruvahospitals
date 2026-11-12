@@ -24,8 +24,8 @@ import { faqSchema, hospitalSchema, websiteSchema } from '@/lib/schema';
 export default function Home({ guides, videos, reels, questions }) {
   return (
     <Layout
-      fullTitle="Dhruva Hospitals, Kadapa – Gynaecology, Pregnancy & Child Care"
-      description="Hospital in Kadapa for gynaecology, pregnancy and delivery, IVF, paediatrics and a Level III NICU, with 24/7 emergency care. Call +91 99599 59694 to book."
+      fullTitle="Dhruva Hospitals, Kadapa – Maternity, Children’s & IVF Hospital"
+      description="Hospital in Kadapa for pregnancy and delivery, children and newborns with a Level III NICU, gynaecology and IVF, plus 24/7 emergency care. Call +91 99599 59694."
       jsonLd={[hospitalSchema(), websiteSchema(), faqSchema(faqs)]}
     >
       <HeroVideo />
