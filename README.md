@@ -75,6 +75,12 @@ To also show the newest reels as cards that play on the site, connect the Instag
 
 The token lasts 60 days, so repeat steps 3 and 4 before then (a calendar reminder helps). If it expires, the site quietly goes back to the Instagram widget; nothing breaks.
 
+## Fonts
+
+Plus Jakarta Sans and Noto Sans Telugu are self-hosted from `styles/fonts/` through `next/font/local` in `pages/_app.js`. They are the same variable font files Google Fonts serves, under the SIL Open Font License (the OFL files are in the same folder). Builds therefore don't download fonts from Google: in November 2026 Vercel builds failed in `next/font/google` because Google Fonts returned font URLs it could not parse.
+
+To update a font, download the new `.woff2` files from Google Fonts, replace the files in `styles/fonts/`, and keep the `unicode-range` values in `pages/_app.js` in step with Google's CSS.
+
 ## Google Analytics
 
 Google Tag Manager container `GTM-N9D4XF64` loads once across all pages through `pages/_app.js`, with its no-JavaScript fallback in `pages/_document.js`. No extra environment variables are needed.
