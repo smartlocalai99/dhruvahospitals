@@ -24,6 +24,7 @@ export default function Services() {
             <div key={service.slug} className="flex items-start gap-5">
               <CoverImage
                 src={service.image}
+                alt={service.imageAlt || ''}
                 sizes="112px"
                 className="h-24 w-24 flex-none rounded-2xl sm:h-28 sm:w-28"
               />

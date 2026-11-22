@@ -61,7 +61,7 @@ const infrastructure = [
 export default function AboutPage() {
   return (
     <Layout
-      fullTitle="About Dhruva Hospitals, Kadapa: Founder, Departments & Registration"
+      fullTitle="About Dhruva Hospitals, Kadapa | Founder & Registration"
       description="Dhruva Hospitals, Kadapa opened on 1 May 2026: a registered 20-bed hospital for pregnancy, gynaecology, IVF, paediatrics, NICU, surgery, eye and bone care."
       jsonLd={[
         hospitalSchema(),

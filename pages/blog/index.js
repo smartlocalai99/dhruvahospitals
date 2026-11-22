@@ -12,7 +12,7 @@ import { breadcrumbSchema } from '@/lib/schema';
 export default function BlogIndexPage({ sections, total }) {
   return (
     <Layout
-      fullTitle="Health Blog: Pregnancy, Women's & Child Health | Dhruva Hospitals, Kadapa"
+      fullTitle="Pregnancy, Women's & Child Health Blog | Dhruva Hospitals"
       description={`${total} plain-language articles from Dhruva Hospitals, Kadapa on pregnancy, fertility and IVF, women's health, newborns, children, diabetes, dengue and more.`}
       jsonLd={[
         {

@@ -43,7 +43,7 @@ export default function DoctorProfilePage({ slug, reviewedGuides }) {
   return (
     <Layout
       title={doctor.seoTitle || `${doctor.name} – ${doctor.title}`}
-      description={`${doctor.name} (${doctor.credentials}), ${doctor.designation} at Dhruva Hospitals, Kadapa. Book on ${site.phones.main.display}.`}
+      description={`${doctor.name} (${doctor.credentials}), ${doctor.designation}, Dhruva Hospitals Kadapa. Call ${site.phones.main.display}.`}
       image={doctor.image}
       imageAlt={doctor.name}
       jsonLd={[

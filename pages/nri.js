@@ -83,7 +83,7 @@ const faqs = [
 export default function NriPage({ guides }) {
   return (
     <Layout
-      title="Book a Doctor in Kadapa from Dubai, Kuwait or the UAE"
+      title="Book a Doctor in Kadapa from Dubai or Kuwait"
       description="Living in Dubai, Kuwait or the UAE? Book a gynaecologist, paediatrician or delivery at Dhruva Hospitals in Kadapa by phone or WhatsApp. OPD hours in Gulf time."
       jsonLd={[
         breadcrumbSchema([

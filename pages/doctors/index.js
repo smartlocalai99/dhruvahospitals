@@ -24,7 +24,7 @@ const standards = [
 export default function DoctorsPage() {
   return (
     <Layout
-      title="Doctors in Kadapa: Gynaecologist, Paediatrician & Specialists"
+      title="Kadapa Doctors: Gynaecologist, Paediatrician"
       description="Meet the specialists at Dhruva Hospitals, Kadapa: IVF and gynaecology, neonatology and paediatrics, general medicine, surgery and more."
       jsonLd={breadcrumbSchema([
         { name: 'Home', path: '/' },

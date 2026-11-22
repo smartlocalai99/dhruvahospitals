@@ -7,6 +7,7 @@ const departments = [
   {
     label: "Women's Care",
     image: '/images/pregnant-woman-resting.jpg',
+    imageAlt: 'Pregnant woman resting, cared for by the maternity team at Dhruva Hospitals, Kadapa',
     href: '/services/pregnancy',
     description:
       "Complete care for every stage of a woman's health journey. From antenatal care, safe deliveries and high-risk pregnancies to laparoscopic gynaecology and cancer screening.",
@@ -22,6 +23,7 @@ const departments = [
   {
     label: 'Fertility & IVF',
     image: '/images/dr-mounika-reddy-holding-baby.jpg',
+    imageAlt: 'Fertility specialist Dr. S Mounika Reddy holding a smiling baby',
     href: '/services/fertility',
     description:
       'Advanced reproductive medicine for couples hoping to start a family, with a modular embryology lab, ICSI facilities and personalised treatment plans.',
@@ -37,6 +39,7 @@ const departments = [
   {
     label: 'Child & Neonatal Care',
     image: '/images/paediatrician-checking-baby.jpg',
+    imageAlt: 'Paediatrician listening to a baby’s heartbeat with a stethoscope',
     href: '/services/paediatrics',
     description:
       'A 24-hour Level III NICU for premature and critically ill newborns, and dedicated paediatric care as your child grows, from vaccinations to emergencies.',
@@ -84,6 +87,7 @@ export default function Departments() {
             >
               <CoverImage
                 src={dept.image}
+                alt={dept.imageAlt}
                 tone={selected ? 'dark' : 'light'}
                 sizes="(min-width: 640px) 33vw, 100vw"
                 className="aspect-[4/3] w-full rounded-2xl"

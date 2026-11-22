@@ -3,6 +3,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import BookCallButton from '@/components/BookCallButton';
+import CoverImage from '@/components/CoverImage';
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from '@/components/Icons';
 import { formatDate } from '@/lib/guide-languages';
 import { site, whatsappLink } from '@/lib/site';
@@ -57,7 +58,7 @@ export default function BlogArticle({ post, category, related, service, doctor }
       image={category.image}
       imageAlt={category.imageAlt}
       jsonLd={[
-        blogPostingSchema({ post, path, image: category.image }),
+        blogPostingSchema({ post, path, image: category.image, doctor }),
         breadcrumbSchema([
           { name: 'Home', path: '/' },
           { name: 'Health Blog', path: '/blog' },
@@ -110,6 +111,15 @@ export default function BlogArticle({ post, category, related, service, doctor }
                 )}
               </dl>
             </div>
+
+            <figure className="mt-10">
+              <CoverImage
+                src={category.image}
+                alt={category.imageAlt}
+                sizes="(min-width: 1024px) 768px, 100vw"
+                className="aspect-[16/9] w-full rounded-3xl"
+              />
+            </figure>
 
             {post.sections.map((section) => (
               <div key={section.heading} className="mt-14">

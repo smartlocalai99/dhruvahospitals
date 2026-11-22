@@ -10,7 +10,7 @@ import { breadcrumbSchema } from '@/lib/schema';
 export default function FacilitiesPage() {
   return (
     <Layout
-      title="Hospital Facilities in Kadapa: NICU, ICU & IVF Lab"
+      title="Facilities: NICU, ICU & IVF Lab in Kadapa"
       description="ICU, Level III NICU, modular operation theatres, IVF lab, diagnostics, pharmacy and 24/7 emergency care at Dhruva Hospitals, Kadapa."
       jsonLd={breadcrumbSchema([
         { name: 'Home', path: '/' },
